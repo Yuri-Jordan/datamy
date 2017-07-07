@@ -10,3 +10,4 @@ nbdist/
 .classpath
 .project
 
+/nbproject/

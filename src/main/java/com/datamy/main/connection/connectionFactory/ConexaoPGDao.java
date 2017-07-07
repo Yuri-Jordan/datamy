@@ -26,7 +26,7 @@ public class ConexaoPGDao implements Serializable{
     protected static final String BANCO = "jdbc:postgresql://localhost:5432/datamy";
     
     protected static final String USER = "postgres";
-    protected static final String PASS = "12345";
+    protected static final String PASS = "123";
     
     protected Statement consulta;
     protected ResultSet resultado;
@@ -38,12 +38,14 @@ public class ConexaoPGDao implements Serializable{
             Class.forName("org.postgresql.Driver");                       
             conexao = DriverManager.getConnection(BANCO, USER, PASS);            
             consulta = conexao.createStatement();
+            
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConexaoPGDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoPGDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
     
     protected void fecharConexao(){
