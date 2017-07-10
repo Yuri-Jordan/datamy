@@ -352,11 +352,8 @@
                     <div class="social-section">
                         <h5>Cadastro de Redes Sociais</h5>
                         <ul>
-                            <!--<div id="status">-->
-                                <li><a id="status" class="btn-floating btn-small btn-fb" style="cursor:pointer;" onclick="Login()"><i class="fa fa-facebook"> </i></a></li>
-                               <!--</div>-->   
-                                
-                               <li><a class="btn-floating btn-small btn-tw" href="cadastroPaginaFacebook.xhtml"><i class="fa fa-twitter"> </i></a></li>
+                            <li><a class="btn-floating btn-small btn-fb" id="fbSalvaToken"><i class="fa fa-facebook"> </i></a></li>
+                            <li><a class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"> </i></a></li>
                             <li><a class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"> </i></a></li>
                             <li><a class="btn-floating btn-small btn-li"><i class="fa fa-linkedin"> </i></a></li>
                             <li><a class="btn-floating btn-small btn-git"><i class="fa fa-github"> </i></a></li>
@@ -409,6 +406,26 @@
                 });
             });
 
+        </script>
+        <script src="https://connect.facebook.net/en_US/sdk.js"></script>
+        <script>
+        	(function() {
+	        	FB.init({
+	            	appId            : '967711813375084',
+	            	autoLogAppEvents : true,
+	            	xfbml            : true,
+	            	version          : 'v2.9'
+	          	});
+	        	
+	        	$("#fbSalvaToken").on('click', function(e) {
+	        		FB.login(function(resp) {
+	        			if (resp.authResponse) {
+	        				var accessToken = resp.authResponse.accessToken;
+	        				$.post('/DataMy/recebetoken', {token: accessToken});
+	        			}
+	        		});	
+	        	});
+	        })();
         </script>
     </h:body>
 
