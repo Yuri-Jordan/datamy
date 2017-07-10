@@ -53,36 +53,34 @@
                                         <tr>
                                             <th>Mensagem do post</th>
                                             <th>Reações</th>
-                                            <th>Publicado por</th>
-                                            <th>Link da postagem</th>                                            
+                                            <th>Publicado por</th>                                                     
                                             <th>Contador de comentarios</th>
                                             <th>Mensagem do cliente</th>
                                         </tr>
                                     </thead>
                                     <tbody>                                        
-                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="comentario">                                            
+                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="coment">                                            
                                             <tr>
-                                                <td><h:outputText value="#{comentario.cometario_fb.postMessage}" /></td>
-                                                <td><h:outputText value="#{comentario.cometario_fb.postLikesCount}" /></td>
-                                                <td><h:outputText value="#{comentario.cometario_fb.postFromName}" /></td>
-                                                <td><h:outputText value="#{comentario.cometario_fb.postLink}" /></td>
-                                                <td><h:outputText value="#{comentario.cometario_fb.postCommentsCount}" /></td>
-                                                <td><h:outputText value="#{comentario.cometario_fb.commentsMessage}" /></td>                                                
+                                                <td><h:outputText value="#{coment.postMessage}" /></td>
+                                                <td><h:outputText value="#{coment.postLikesCount}" /></td>
+                                                <td><h:outputText value="#{coment.postFromName}" /></td>                                                
+                                                <td><h:outputText value="#{coment.postCommentsCount}" /></td>
+                                                <td><h:outputText value="#{coment.commentsMessage}" /></td>                                                
                                                 <td>
-                                                    <a class="btn" data-popup-open="popup-#{comentario.cometario_fb.rowNames}" href="#">Responder</a>
+                                                    <a class="btn" data-popup-open="popup-#{coment.rowNames}" href="#">Responder</a>
 
-                                                    <div class="popup" data-popup="popup-#{comentario.cometario_fb.rowNames}">
+                                                    <div class="popup" data-popup="popup-#{coment.rowNames}">
                                                         <div class="popup-inner">
-                                                            <h2>Responder ao comentario de <h:outputText value="#{comentarios.cometario_fb.commentsFromName}"/></h2>
+                                                            <h2>Responder ao comentario de <h:outputText value="#{coment.commentsFromName}"/></h2>
                                                             <br/>
-                                                            <h5>Comentario: <h:outputText value="#{comentarios.cometario_fb.commentsMessage}"/></h5>
+                                                            <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
                                                             <br/>
 
-                                                            <p>Resposta: <h:inputText value="#{comentarios.cometario_fb.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
-                                                            <p><a data-popup-close="popup-#{comentarios.cometario_fb.rowNames}" href="#">Fechar</a><a data-popup-close="popup-1" href="#">Publicar</a></p>
-                                                            <p><a data-popup-close="popup-1" href="#{comentario.marcarVisto(cometario_fb)}">Marcar como visto</a></p>
+                                                            <p>Resposta: <h:inputText value="#{coment.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
+                                                            <p><a data-popup-close="popup-#{coment.rowNames}" href="#">Fechar</a><a data-popup-close="popup-1" href="#">Publicar</a></p>
+                                                            <p><a data-popup-close="popup-1" href="#{comentario.marcarVisto(comentario.comentario_fb)}">Marcar como visto</a></p>
 
-                                                            <a class="popup-close" data-popup-close="popup-#{comentarios.cometario_fb.rowNames}" href="#">x</a>
+                                                            <a class="popup-close" data-popup-close="popup-#{coment.rowNames}" href="#">x</a>
                                                         </div>
                                                     </div>                                                    
                                                 </td>                                                

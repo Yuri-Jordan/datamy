@@ -39,28 +39,28 @@ public class ComentarioFBDao extends ConexaoPGDao {
 
             while (resultado.next()) {
                 comentarios_fb.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        resultado.getString("likes.from_name"),
-                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
+                        resultado.getString("row_names"),
+                        resultado.getString("post_from_id"),
+                        resultado.getString("post_from_name"),
+                        resultado.getString("post_message"),
+                        resultado.getString("post_created_time"),
+                        resultado.getString("post_type"),
+                        resultado.getString("post_link"),
+                        resultado.getString("post_id"),
+                        resultado.getString("post_likes_count"),
+                        resultado.getString("post_comments_count"),
+                        resultado.getString("post_shares_count"),
+                        resultado.getString("likes_from_name"),
+                        resultado.getString("likes_from_id"),
+                        resultado.getString("comments_from_id"),
+                        resultado.getString("comments_from_name"),
+                        resultado.getString("comments_message"),
+                        resultado.getString("comments_created_time"),
+                        resultado.getString("comments_likes_count"),
+                        resultado.getString("comments_comments_count"),
+                        resultado.getString("comments_id"),
                         resultado.getString("avaliacao"),
-                        resultado.getString("visto")
+                        resultado.getBoolean("visto")
                 ));
             }
 
@@ -81,28 +81,28 @@ public class ComentarioFBDao extends ConexaoPGDao {
             resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'negative' AND visto = FALSE");
             while (resultado.next()) {
                 comentarios_fb_lista.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        resultado.getString("likes.from_name"),
-                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
+                        resultado.getString("row_names"),
+                        resultado.getString("post_from_id"),
+                        resultado.getString("post_from_name"),
+                        resultado.getString("post_message"),
+                        resultado.getString("post_created_time"),
+                        resultado.getString("post_type"),
+                        resultado.getString("post_link"),
+                        resultado.getString("post_id"),
+                        resultado.getString("post_likes_count"),
+                        resultado.getString("post_comments_count"),
+                        resultado.getString("post_shares_count"),
+                        resultado.getString("likes_from_name"),
+                        resultado.getString("likes_from_id"),
+                        resultado.getString("comments_from_id"),
+                        resultado.getString("comments_from_name"),
+                        resultado.getString("comments_message"),
+                        resultado.getString("comments_created_time"),
+                        resultado.getString("comments_likes_count"),
+                        resultado.getString("comments_comments_count"),
+                        resultado.getString("comments_id"),
                         resultado.getString("avaliacao"),
-                        resultado.getString("visto")
+                        resultado.getBoolean("visto")
                 ));
             }
 
@@ -123,28 +123,28 @@ public class ComentarioFBDao extends ConexaoPGDao {
             resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'neutral' AND visto = FALSE");
             while (resultado.next()) {
                 comentarios_fb_lista.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        resultado.getString("likes.from_name"),
-                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
+                        resultado.getString("row_names"),
+                        resultado.getString("post_from_id"),
+                        resultado.getString("post_from_name"),
+                        resultado.getString("post_message"),
+                        resultado.getString("post_created_time"),
+                        resultado.getString("post_type"),
+                        resultado.getString("post_link"),
+                        resultado.getString("post_id"),
+                        resultado.getString("post_likes_count"),
+                        resultado.getString("post_comments_count"),
+                        resultado.getString("post_shares_count"),
+                        resultado.getString("likes_from_name"),
+                        resultado.getString("likes_from_id"),
+                        resultado.getString("comments_from_id"),
+                        resultado.getString("comments_from_name"),
+                        resultado.getString("comments_message"),
+                        resultado.getString("comments_created_time"),
+                        resultado.getString("comments_likes_count"),
+                        resultado.getString("comments_comments_count"),
+                        resultado.getString("comments_id"),
                         resultado.getString("avaliacao"),
-                        resultado.getString("visto")
+                        resultado.getBoolean("visto")
                 ));
             }
 
@@ -165,28 +165,28 @@ public class ComentarioFBDao extends ConexaoPGDao {
             resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'positive' AND visto = FALSE");
             while (resultado.next()) {
                 comentarios_fb_lista.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        resultado.getString("likes.from_name"),
-                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
+                        resultado.getString("row_names"),
+                        resultado.getString("post_from_id"),
+                        resultado.getString("post_from_name"),
+                        resultado.getString("post_message"),
+                        resultado.getString("post_created_time"),
+                        resultado.getString("post_type"),
+                        resultado.getString("post_link"),
+                        resultado.getString("post_id"),
+                        resultado.getString("post_likes_count"),
+                        resultado.getString("post_comments_count"),
+                        resultado.getString("post_shares_count"),
+                        resultado.getString("likes_from_name"),
+                        resultado.getString("likes_from_id"),
+                        resultado.getString("comments_from_id"),
+                        resultado.getString("comments_from_name"),
+                        resultado.getString("comments_message"),
+                        resultado.getString("comments_created_time"),
+                        resultado.getString("comments_likes_count"),
+                        resultado.getString("comments_comments_count"),
+                        resultado.getString("comments_id"),
                         resultado.getString("avaliacao"),
-                        resultado.getString("visto")
+                        resultado.getBoolean("visto")
                 ));
             }
 
@@ -253,15 +253,14 @@ public class ComentarioFBDao extends ConexaoPGDao {
     public void marcarVisto(ComentarioFB coment) {
         CriarConexao();
         try {
-            String sql = "UPDATE `comentario_fb_avaliados` SET `row.names`=?,"
-                    + "`post.from_id`=?,`post.from_name`=?,`post.message`=?,"
-                    + "`post.created_time`=?, `post.type`=?, `post.link`=?, "
-                    + "`post.id`=?, `post.likes_count`=?, `post.comments_count`=?,"
-                    + "`post.shares_count`=?, `likes.from_name`=?, `likes.from_id`=?, "
-                    + "`comments.from_id`=?, `comments.from_name`=?, "
-                    + "`comments.message`=?, `comments.created_time`=?, "
-                    + "`comments.likes_count`=?, `comments.id`=?, `avaliacao`=?, "
-                    + "`visto`=? WHERE `row.names`=?";
+            String sql = "UPDATE comentario_fb_avaliados SET post_from_id=?,post_from_name=?,post_message=?,"
+                    + "post_created_time=?, post_type=?, post_link=?, "
+                    + "post_id=?, post_likes_count=?, post_comments_count=?,"
+                    + "post_shares_count=?, likes_from_name=?, likes_from_id=?, "
+                    + "comments_from_id=?, comments_from_name=?, "
+                    + "comments_message=?, comments_created_time=?, "
+                    + "comments_likes_count=?, comments_comments_count=?, comments_id=?, avaliacao=?, "
+                    + "visto=? WHERE 'row_names'=?";
 
             preparacao = conexao.prepareStatement(sql);
             preparacao.setString(1, coment.getPostFromId());
@@ -284,7 +283,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
             preparacao.setString(18, coment.getCommentsCommentsCount());
             preparacao.setString(19, coment.getCommentsId());
             preparacao.setString(20, coment.getAvaliacao());
-            preparacao.setString(21, coment.getVisto());
+            preparacao.setBoolean(21, true);
             preparacao.setString(22, coment.getRowNames());
 
             preparacao.executeUpdate();
