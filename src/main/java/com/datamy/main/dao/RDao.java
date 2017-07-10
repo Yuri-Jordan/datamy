@@ -23,10 +23,10 @@ public class RDao extends ConexaoPGDao{
         CriarConexao();
         try {
             
-            preparacao = conexao.prepareStatement("INSERT INTO `RDB`(`token`, `url`, `pagina`) VALUES (?,?,?)");
+            preparacao = conexao.prepareStatement("INSERT INTO RDB(token, url) VALUES (?,?)");
             preparacao.setString(1, rbean.getToken());
             preparacao.setString(2, rbean.getUrl());
-            preparacao.setString(3, rbean.getPagina());
+            
             preparacao.executeUpdate();
             
         } catch (SQLException ex) {
@@ -47,7 +47,7 @@ public class RDao extends ConexaoPGDao{
             resultado = preparacao.executeQuery();                        
             
             while(resultado.next()){                
-                dadosPagina.add(new RBean(resultado.getString("token"), resultado.getString("url"),resultado.getString("pagina")));
+                dadosPagina.add(new RBean(resultado.getString("token"), resultado.getString("url")));
             }
             
         } catch (SQLException ex) {

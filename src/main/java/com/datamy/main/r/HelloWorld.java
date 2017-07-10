@@ -21,7 +21,7 @@ public class HelloWorld {
             RDao rdao = new RDao();            
             String token = rdao.select(id).getToken();
             String url = rdao.select(id).getUrl();
-            String pagina = rdao.select(id).getPagina();
+            
             RConnection con = new R().getRconexao();
             con.eval("source('C:/Users/yuri/Documents/Git"
                     + "/datamy/src/main/webapp/resources"

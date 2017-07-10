@@ -12,9 +12,13 @@ package com.datamy.main.bean;
 public class RBean {
     private String token;
     private String url;
-    private String pagina;
 
     public RBean() {
+    }
+
+    public RBean(String token, String url) {
+        this.token = token;
+        this.url = url;
     }
 
     public String getToken() {
@@ -32,19 +36,7 @@ public class RBean {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    public String getPagina() {
-        return pagina;
-    }
-
-    public void setPagina(String pagina) {
-        this.pagina = pagina;
-    }
-
-    public RBean(String token, String url, String pagina) {
-        this.token = token;
-        this.url = url;
-        this.pagina = pagina;
-    }
+    
+      
     
 }
