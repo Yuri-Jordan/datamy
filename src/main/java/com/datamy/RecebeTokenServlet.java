@@ -1,5 +1,6 @@
 package com.datamy;
 
+import com.datamy.main.connection.connectionFactory.ConexaoPGDao;
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -22,11 +23,10 @@ public class RecebeTokenServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String token = request.getParameter("token");
-		
-		ConnectionFactory factory = new ConnectionFactory();
-		UserTokenDao udao = new UserTokenDao(factory);
+				
+		UserTokenDao udao = new UserTokenDao();
 		udao.saveToken(1, token);
-		udao.close();
+//		udao.close();
 	}
 
 }
