@@ -60,28 +60,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>                                        
-                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="comentarios">                                            
+                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="comentario">                                            
                                             <tr>
-                                                <td><h:outputText value="#{comentarios.postMessage}" /></td>
-                                                <td><h:outputText value="#{comentarios.postLikesCount}" /></td>
-                                                <td><h:outputText value="#{comentarios.postFromName}" /></td>
-                                                <td><h:outputText value="#{comentarios.postLink}" /></td>
-                                                <td><h:outputText value="#{comentarios.postCommentsCount}" /></td>
-                                                <td><h:outputText value="#{comentarios.commentsMessage}" /></td>                                                
+                                                <td><h:outputText value="#{comentario.cometario_fb.postMessage}" /></td>
+                                                <td><h:outputText value="#{comentario.cometario_fb.postLikesCount}" /></td>
+                                                <td><h:outputText value="#{comentario.cometario_fb.postFromName}" /></td>
+                                                <td><h:outputText value="#{comentario.cometario_fb.postLink}" /></td>
+                                                <td><h:outputText value="#{comentario.cometario_fb.postCommentsCount}" /></td>
+                                                <td><h:outputText value="#{comentario.cometario_fb.commentsMessage}" /></td>                                                
                                                 <td>
-                                                    <a class="btn" data-popup-open="popup-#{comentarios.rowNames}" href="#">Responder</a>
+                                                    <a class="btn" data-popup-open="popup-#{comentario.cometario_fb.rowNames}" href="#">Responder</a>
 
-                                                    <div class="popup" data-popup="popup-#{comentarios.rowNames}">
+                                                    <div class="popup" data-popup="popup-#{comentario.cometario_fb.rowNames}">
                                                         <div class="popup-inner">
-                                                            <h2>Responder ao comentario de <h:outputText value="#{comentarios.commentsFromName}"/></h2>
+                                                            <h2>Responder ao comentario de <h:outputText value="#{comentarios.cometario_fb.commentsFromName}"/></h2>
                                                             <br/>
-                                                            <h5>Comentario: <h:outputText value="#{comentarios.commentsMessage}"/></h5>
+                                                            <h5>Comentario: <h:outputText value="#{comentarios.cometario_fb.commentsMessage}"/></h5>
                                                             <br/>
 
-                                                            <p>Resposta: <h:inputText value="#{comentarios.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
-                                                            <p><a data-popup-close="popup-#{comentarios.rowNames}" href="#">Fechar</a><a data-popup-close="popup-1" href="#">Publicar</a></p>
+                                                            <p>Resposta: <h:inputText value="#{comentarios.cometario_fb.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
+                                                            <p><a data-popup-close="popup-#{comentarios.cometario_fb.rowNames}" href="#">Fechar</a><a data-popup-close="popup-1" href="#">Publicar</a></p>
 
-                                                            <a class="popup-close" data-popup-close="popup-#{comentarios.rowNames}" href="#">x</a>
+                                                            <a class="popup-close" data-popup-close="popup-#{comentarios.cometario_fb.rowNames}" href="#">x</a>
                                                         </div>
                                                     </div>                                                    
                                                 </td>                                                

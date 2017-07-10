@@ -54,7 +54,12 @@ public class ComentarioFBManagedBean implements Serializable{
     public ArrayList<RespostasBot> getRespostasPendentes(){
         return comantario_fb_dao.aceitarResposta();
     }
-     
+    
+    public void marcarVisto(ComentarioFB coment){
+        coment.setVisto("TRUE");
+        comantario_fb_dao.marcarVisto(coment);
+    }
+    
 //    public void formularResposta(ComentarioFB coment){
 //        try {
 //        	comantario_fb_dao.formular(coment);
@@ -62,4 +67,20 @@ public class ComentarioFBManagedBean implements Serializable{
 //            Logger.getLogger(ComentarioFBManagedBean.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+
+    public ComentarioFB getCometario_fb() {
+        return cometario_fb;
+    }
+
+    public void setCometario_fb(ComentarioFB cometario_fb) {
+        this.cometario_fb = cometario_fb;
+    }
+
+    public ComentarioFBDao getComantario_fb_dao() {
+        return comantario_fb_dao;
+    }
+
+    public void setComantario_fb_dao(ComentarioFBDao comantario_fb_dao) {
+        this.comantario_fb_dao = comantario_fb_dao;
+    }
 }

@@ -31,11 +31,12 @@ public class ComentarioFB {
     String commentsCommentsCount;
     String commentsId;
     String avaliacao;
+    String visto;
 
     public ComentarioFB() {
     }
 
-    public ComentarioFB(String row_names, String post_from_id, String post_from_name, String post_message, String post_created_time, String post_type, String post_link, String post_id, String post_likes_count, String post_comments_count, String post_shares_count, String likes_from_name, String likes_from_id, String comments_from_id, String comments_from_name, String comments_message, String comments_created_time, String comments_likes_count, String comments_comments_count, String comments_id, String avaliacao) {
+    public ComentarioFB(String row_names, String post_from_id, String post_from_name, String post_message, String post_created_time, String post_type, String post_link, String post_id, String post_likes_count, String post_comments_count, String post_shares_count, String likes_from_name, String likes_from_id, String comments_from_id, String comments_from_name, String comments_message, String comments_created_time, String comments_likes_count, String comments_comments_count, String comments_id, String avaliacao, String visto) {
         this.rowNames = row_names;
         this.postFromId = post_from_id;
         this.postFromName = post_from_name;
@@ -57,6 +58,7 @@ public class ComentarioFB {
         this.commentsCommentsCount = comments_comments_count;
         this.commentsId = comments_id;
         this.avaliacao = avaliacao;
+        this.visto = visto;
     }
 
     public String getRowNames() {
@@ -226,10 +228,13 @@ public class ComentarioFB {
     public void setAvaliacao(String avaliacao) {
         this.avaliacao = avaliacao;
     }
-    
-    
-    
 
-    
+    public String getVisto() {
+        return visto;
+    }
+
+    public void setVisto(String visto) {
+        this.visto = visto;
+    }           
     
 }
