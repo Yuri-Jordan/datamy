@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./dataMyFace.xhtml">
+                template="./dataMyFace.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
     
     <ui:define name="content">
         <br/><br/><br/><br/>
@@ -32,15 +33,15 @@
                             <h4 class="card-title">Mensagens negativas</h4>
                             <hr/>
                             <!--texto-->
-                            <p class="card-text">Você tem 37 mensagens classificadas como negativas.</p>
+                            <p class="card-text">Você tem <h:outputText value="#{comentario.listarComentariosRuins().size()}"/> mensagens classificadas como negativas.</p>
                         </div>
                         <!--Conteúdo do cartão-->
 
                         <!--Rodapé do cartão-->
                         <div class="card-data">
                             <ul>                                
-                                <li><a href="#"><i class="fa fa-facebook"> </i>31</a></li>
-                                <li><a href="#"><i class="fa fa-twitter"> </i>6</a></li>
+                                <li><a href="#"><i class="fa fa-facebook"> </i><h:outputText value="#{comentario.listarComentariosRuins().size()}"/></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"> </i>0</a></li>
                             </ul>
                         </div>
                         <!--Rodapé do cartão-->
@@ -73,14 +74,14 @@
                             <h4 class="card-title">Mensagens neutras</h4>
                             <hr/>
                             <!--texto-->
-                            <p class="card-text">Você tem 68 mensagens classificadas como neutras.</p>
+                            <p class="card-text">Você tem <h:outputText value="#{comentario.listarComentariosNeutros().size()}"/> mensagens classificadas como neutras.</p>
                         </div>
                         <!--Conteúdo do cartão-->
 
                         <!--Rodapé do cartão-->
                         <div class="card-data">
                             <ul>                                
-                                <li><a href="#"><i class="fa fa-facebook"> </i>68</a></li>
+                                <li><a href="#"><i class="fa fa-facebook"> </i><h:outputText value="#{comentario.listarComentariosNeutros().size()}"/></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"> </i>0</a></li>
                             </ul>
                         </div>
@@ -114,15 +115,15 @@
                             <h4 class="card-title">Mensagens boas</h4>
                             <hr/>
                             <!--texto-->
-                            <p class="card-text">Você tem 142 mensagens classificadas como boas.</p>
+                            <p class="card-text">Você tem <h:outputText value="#{comentario.listarComentariosBons().size()}"/> mensagens classificadas como boas.&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         </div>
                         <!--Conteúdo do cartão-->
 
                         <!--Rodapé do cartão-->
                         <div class="card-data">
-                            <ul>                                
-                                <li><a href="#"><i class="fa fa-facebook"> </i>94</a></li>
-                                <li><a href="#"><i class="fa fa-twitter"> </i>28</a></li>
+                            <ul>                                    
+                                <li><a href="#"><i class="fa fa-facebook"> </i><h:outputText value="#{comentario.listarComentariosBons().size()}"/></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"> </i>0</a></li>
                             </ul>
                         </div>
                         <!--Rodapé do cartão-->

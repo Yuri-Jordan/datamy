@@ -9,4 +9,5 @@ nbdist/
 .settings/
 .classpath
 .project
+/nbproject/
 WEB-INF/lib/

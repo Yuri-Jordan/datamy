@@ -38,12 +38,14 @@ public class ConexaoPGDao implements Serializable{
             Class.forName("org.postgresql.Driver");                       
             conexao = DriverManager.getConnection(BANCO, USER, PASS);            
             consulta = conexao.createStatement();
+            
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConexaoPGDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoPGDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
     
     protected void fecharConexao(){

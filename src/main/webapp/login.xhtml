@@ -1,38 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-	<head>
-		<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-		<link rel="shortcut icon" href="resources/imagens/datamy.png" type="image/icon" />
-		<title>DataMy</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="col-lg-4 col-lg-offset-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<b>Area administrativa</b>
-					</div>
-					<div class="panel-body">
-						<h:form>
-							<div class="form-group">
-								<label>Usuário:</label>
-								<h:inputText styleClass="form-control" id="cmpLogin" required="true" value="#{usuario.usuario.username}" />
-							</div>
-							<div class="form-group">
-								<label>Senha:</label>
-								<h:inputSecret styleClass="form-control" value="#{usuario.usuario.password}" />
-							</div>
-							
-							<h:commandButton value="Login" styleClass="btn btn-block btn-primary" id="btnLogin" action="#{usuario.logar()}" />
-						</h:form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <head>    
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+        <link rel="shortcut icon" href="resources/imagens/datamy.png" type="image/icon" /> 
+        <title>DataMy</title>
+    </head>
+    <body>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+        <!--Título do Datamy --> 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-offset-4">
+                    <p align="center"><img src="resources/imagens/datamy.png"/></p>
+                    <h3 class="text-center text-primary">
+                        DataMy Administrativo
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div id="blocoLogin" class="container">
+
+            <!--formulário do login -->            
+            <h:form>
+                <!--col-sm-offset-6 deixa o conteúdo na outra div -->    
+                <div class="row">
+                    <div class="col-md-4 col-sm-offset-4">
+                        <div class="input-group" >
+                            <label class="input-group input-group-addon"><b class="glyphicon glyphicon-user"></b></label>                            
+                            <h:inputText styleClass="form-control" id="cmpLogin" required="true" value="#{usuario.usuario.username}" a:placeholder="Login"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--formulário da senha -->    
+                <br/>
+                <div class="row">
+                    <div class="col-md-4 col-sm-offset-4">
+                        <div class="input-group">
+                            <label class="input-group input-group-addon"><b class="glyphicon glyphicon-log-in"></b></label>                            
+                            <h:inputSecret styleClass="form-control" value="#{usuario.usuario.password}" a:placeholder="senha" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--link caso o usuario esqueceu a senha -->
+                <div class="row">
+                    <div class="col-md-4 col-sm-offset-4 text-right">
+                        <a href="esqueceu.xhtml">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+
+                <!--link para cadastrar -->
+                <br/>
+                <div class="row">
+                    <div class="col-md-4 col-sm-offset-4 text-right">
+                        <a href="cadastro.xhtml">Cadastre-se</a>
+                    </div>
+                </div>
+
+
+                <!--botão de login -->
+                <br/>
+                <div class="row">
+                    <div class="col-md-4 col-sm-offset-4 text-right">                        
+                        <h:commandButton value="Login" styleClass="btn btn-default" id="btnLogin" action="#{usuario.logar()}" />
+                    </div>
+                </div>
+            </h:form>   
+<!--            <div class="row">
+                <div class="col-md-4 col-sm-offset-4 text-right">
+                    <h3 class="text-center text-info">
+                        - - - - - - - Entrar com Facebook - - - - - - -
+                    </h3>
+                </div>
+            </div>
+            <script>
+                //<![CDATA[
+                window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: '1119241851553043', // Set YOUR APP ID
+                        status: true, // check login status
+                        cookie: true, // enable cookies to allow the server to access the session
+                        xfbml: true, // parse XFBML
+                        version: 'v2.9'
+                    });
+                    FB.Event.subscribe('auth.authResponseChange', function (response) {
+                        if (response.status === 'connected') {
+                            document.getElementById("message").innerHTML += "<br>Connected to Facebook";
+                            //Conectado 
+                        } else if (response.status === 'not_authorized') {
+                            document.getElementById("message").innerHTML += "<br/>Failed to Connect";
+                            //Não conectado
+                        } else {
+                            document.getElementById("message").innerHTML += "<br/>Logged Out";
+                            //UNKNOWN ERROR
+                        }
+                    });
+                };
+                function Login() {
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            getUserInfo();
+                            $.ajax('/recebetoken', {
+                                method: 'POST',
+                                data: {
+                                    uid: 1,
+                                    token: response.authResponse.accessToken
+                                }
+                            });
+                        } else {
+                            console.log('O usuário cancelou o login ou não autorizou totalmente.');
+                        }
+                    }, {scope: 'publish_actions,email,user_about_me,user_birthday,user_hometown'});
+                }
+                function getUserInfo() {
+                    FB.api('/me?fields=name,email,gender,birthday,link', function (response) {
+                        console.log(response);
+                        var str = "<b>Name</b> : " + response.name + "<br/>";
+                        str += "<b>Link: </b>" + response.link + "<br/>";
+                        str += "<b>id: </b>" + response.id + "<br/>";
+                        str += "<b>Email:</b> " + response.email + "<br/>";
+                        getPhoto();
+                        str += "<input type='button' value='Logout' onclick='Logout();'/>";
+                        document.getElementById("status").innerHTML = str;
+                    });
+                }
+                function getPhoto() {
+                    FB.api('/me/picture?type=normal', function (response) {
+                        var str = "<br/><b>Pic</b> : <img src='" + response.data.url + "'/>";
+                        document.getElementById("status").innerHTML += str;
+                    });
+                }
+                function Logout() {
+                    FB.logout(function () {
+                        document.location.reload();
+                    });
+                }
+                //Carrega o SDK
+                (function (d) {
+                    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                    if (d.getElementById(id)) {
+                        return;
+                    }
+                    js = d.createElement('script');
+                    js.id = id;
+                    js.async = true;
+                    js.src = "http://connect.facebook.net/pt_BR/all.js";
+                    ref.parentNode.insertBefore(js, ref);
+                }(document));
+                //]]>
+            </script>
+
+            <div id="fb-root"></div>
+            <div align="center">
+                <div id="status">
+                    <br/>
+                    <img src="data:image/jpeg;base64,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" width="100" style="cursor:pointer;" onclick="Login()"/>
+                </div>
+                <br/><br/>
+                <div id="message"></div>
+            </div>-->
+    	</div>
+    	<script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous">                
+        </script>        
+    </body>
 </html>
