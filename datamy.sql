@@ -38,6 +38,24 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+
+-- Table: public.user_token
+
+-- DROP TABLE public.user_token;
+
+CREATE TABLE public.user_token
+(
+  id bigint NOT NULL DEFAULT nextval('user_token_id_seq'::regclass),
+  user_id integer,
+  token text,
+  CONSTRAINT user_token_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.user_token
+  OWNER TO postgres;
+
 --
 -- TOC entry 181 (class 1259 OID 32769)
 -- Name: cartaocredito; Type: TABLE; Schema: public; Owner: postgres
