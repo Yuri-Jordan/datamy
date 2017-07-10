@@ -23,7 +23,7 @@ public class RDao extends ConexaoPGDao{
         CriarConexao();
         try {
             
-            preparacao = conexao.prepareStatement("INSERT INTO `cartaocredito`(`token`, `url`, `pagina`) VALUES (?,?,?)");
+            preparacao = conexao.prepareStatement("INSERT INTO `RDB`(`token`, `url`, `pagina`) VALUES (?,?,?)");
             preparacao.setString(1, rbean.getToken());
             preparacao.setString(2, rbean.getUrl());
             preparacao.setString(3, rbean.getPagina());
@@ -42,7 +42,7 @@ public class RDao extends ConexaoPGDao{
         
         try {
             
-            preparacao = conexao.prepareStatement("SELECT * FROM chamado WHERE id=?");
+            preparacao = conexao.prepareStatement("SELECT * FROM RDB WHERE id=?");
             preparacao.setInt(1, id);            
             resultado = preparacao.executeQuery();                        
             
