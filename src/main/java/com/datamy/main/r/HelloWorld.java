@@ -18,7 +18,7 @@ public class HelloWorld {
             RConnection con = new R().getRconexao();
             con.eval("source('C:/Users/yuri/Documents/Git"
                     + "/datamy/src/main/webapp/resources"
-                    + "/R scripts/teste.R')").asString();
+                    + "/R scripts/teste.R')");
             
             String result = con.eval("helloworld('"+ nome + "')").asString();
             con.close();
