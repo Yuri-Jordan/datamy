@@ -5,17 +5,14 @@
  */
 package com.datamy.main.managebean;
 
-import com.datamy.main.bean.Chamado;
 import com.datamy.main.bean.ComentarioFB;
 import com.datamy.main.bean.RespostasBot;
-import com.datamy.main.dao.ChamadoDao;
+import com.datamy.main.bean.Usuario;
 import com.datamy.main.dao.ComentarioFBDao;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -24,41 +21,47 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean(name = "comentario")
 @RequestScoped
-public class ComentarioFBManagedBean implements Serializable{
-    private static final long serialVersionUID = 1L;    
-    
+public class ComentarioFBManagedBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private ComentarioFB comentario_fb;
     private ComentarioFBDao comentario_fb_dao;
+
+    @ManagedProperty(value = "#{usuario.usuario}")
+    private Usuario user;
 
     public ComentarioFBManagedBean() {
         this.comentario_fb_dao = new ComentarioFBDao();
         this.comentario_fb = new ComentarioFB();
-    }   
-    
-    public ArrayList<ComentarioFB> listarComentariosRuins(){                        
+        this.user = new Usuario();
+    }
+
+    public ArrayList<ComentarioFB> listarComentariosRuins() {
         return comentario_fb_dao.selectRuins();
     }
-    
-    public ArrayList<ComentarioFB> listarComentariosNeutros(){                        
+
+    public ArrayList<ComentarioFB> listarComentariosNeutros() {
         return comentario_fb_dao.selectNeutros();
     }
-    
-    public ArrayList<ComentarioFB> listarComentariosBons(){                        
+
+    public ArrayList<ComentarioFB> listarComentariosBons() {
         return comentario_fb_dao.selectBons();
     }
-    
-    public ArrayList<RespostasBot> getRespostas(){
+
+    public ArrayList<RespostasBot> getRespostas() {
         return comentario_fb_dao.respostasAceitas();
     }
-    
-    public ArrayList<RespostasBot> getRespostasPendentes(){
+
+    public ArrayList<RespostasBot> getRespostasPendentes() {
         return comentario_fb_dao.aceitarResposta();
     }
-    
-    public void marcarVisto(ComentarioFB coment){        
-        comentario_fb_dao.marcarVisto(coment);
+
+    public String marcarVisto(ComentarioFB com) {
+        comentario_fb_dao.marcarVisto(com);
+        return "AnalisarComentariosBons.xhtml";
     }
-    
+
 //    public void formularResposta(ComentarioFB coment){
 //        try {
 //        	comentario_fb_dao.formular(coment);
@@ -66,7 +69,6 @@ public class ComentarioFBManagedBean implements Serializable{
 //            Logger.getLogger(ComentarioFBManagedBean.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-
     public ComentarioFB getComentario_fb() {
         return comentario_fb;
     }
@@ -81,5 +83,13 @@ public class ComentarioFBManagedBean implements Serializable{
 
     public void setComentario_fb_dao(ComentarioFBDao comentario_fb_dao) {
         this.comentario_fb_dao = comentario_fb_dao;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
 }

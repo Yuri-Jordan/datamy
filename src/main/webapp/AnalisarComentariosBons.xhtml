@@ -59,31 +59,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>                                        
-                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="coment">                                            
+                                        <ui:repeat value="#{comentario.listarComentariosBons()}" var="coment" rendered="true">                                            
                                             <tr>
                                                 <td><h:outputText value="#{coment.postMessage}" /></td>
                                                 <td><h:outputText value="#{coment.postLikesCount}" /></td>
                                                 <td><h:outputText value="#{coment.postFromName}" /></td>                                                
                                                 <td><h:outputText value="#{coment.postCommentsCount}" /></td>
-                                                <td><h:outputText value="#{coment.commentsMessage}" /></td>                                                
+                                                <td><h:outputText value="#{coment.commentsMessage}" /></td>                                                                                                                                                
+                                            </tr>
+                                            <tr>
                                                 <td>
-                                                    <a class="btn" data-popup-open="popup-#{coment.rowNames}" href="#">Responder</a>
+                                                    <h:form>
+                                                        <a class="btn" data-popup-open="popup-#{coment.commentsId}" href="#">Responder</a>
 
-                                                    <div class="popup" data-popup="popup-#{coment.rowNames}">
-                                                        <div class="popup-inner">
-                                                            <h2>Responder ao comentario de <h:outputText value="#{coment.commentsFromName}"/></h2>
-                                                            <br/>
-                                                            <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
-                                                            <br/>
+                                                        <div class="popup" data-popup="popup-#{coment.commentsId}">
+                                                            <div class="popup-inner">
+                                                                <h2>Responder ao comentario de <h:outputText value="#{coment.commentsFromName}"/></h2>
+                                                                <br/>
+                                                                <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
+                                                                <br/>
 
-                                                            <p>Resposta: <h:inputText value="#{coment.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
-                                                            <p><a data-popup-close="popup-#{coment.rowNames}" href="#">Fechar</a><a data-popup-close="popup-1" href="#">Publicar</a></p>
-                                                            <p><a data-popup-close="popup-1" href="#{comentario.marcarVisto(coment)}">Marcar como visto</a></p>
+                                                                <p>Resposta: <h:inputText value="somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
+                                                                <p><a data-popup-close="popup-#{coment.commentsId}" href="#">Fechar</a><a data-popup-close="popup-#{coment.commentsId}" href="#">Publicar</a></p>
+                                                                <p><h:commandLink title="marcar #{coment.commentsId}" action="#{comentario.marcarVisto(coment)}">Marcar como visto</h:commandLink></p>
 
-                                                            <a class="popup-close" data-popup-close="popup-#{coment.rowNames}" href="#">x</a>
-                                                        </div>
-                                                    </div>                                                    
-                                                </td>                                                
+                                                                <a class="popup-close" data-popup-close="popup-#{coment.commentsId}" href="#">x</a>
+                                                            </div>
+                                                        </div> 
+                                                    </h:form>
+                                                </td>
                                             </tr>
                                         </ui:repeat>                                               
                                     </tbody>
