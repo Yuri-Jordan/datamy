@@ -21,8 +21,8 @@ public class ComentarioFB {
     String postLikesCount;
     String postCommentsCount;
     String postSharesCount;
-    String likesFromName;
-    String likesFromId;
+    //String likesFromName;
+    //String likesFromId;
     String commentsFromId;
     String commentsFromName;
     String commentsMessage;
@@ -36,7 +36,7 @@ public class ComentarioFB {
     public ComentarioFB() {
     }
 
-    public ComentarioFB(String row_names, String post_from_id, String post_from_name, String post_message, String post_created_time, String post_type, String post_link, String post_id, String post_likes_count, String post_comments_count, String post_shares_count, String likes_from_name, String likes_from_id, String comments_from_id, String comments_from_name, String comments_message, String comments_created_time, String comments_likes_count, String comments_comments_count, String comments_id, String avaliacao, String visto) {
+    public ComentarioFB(String row_names, String post_from_id, String post_from_name, String post_message, String post_created_time, String post_type, String post_link, String post_id, String post_likes_count, String post_comments_count, String post_shares_count, /*String likes_from_name, String likes_from_id,*/ String comments_from_id, String comments_from_name, String comments_message, String comments_created_time, String comments_likes_count, String comments_comments_count, String comments_id, String avaliacao, String visto) {
         this.rowNames = row_names;
         this.postFromId = post_from_id;
         this.postFromName = post_from_name;
@@ -48,8 +48,8 @@ public class ComentarioFB {
         this.postLikesCount = post_likes_count;
         this.postCommentsCount = post_comments_count;
         this.postSharesCount = post_shares_count;
-        this.likesFromName = likes_from_name;
-        this.likesFromId = likes_from_id;
+        //this.likesFromName = likes_from_name;
+//        this.likesFromId = likes_from_id;
         this.commentsFromId = comments_from_id;
         this.commentsFromName = comments_from_name;
         this.commentsMessage = comments_message;
@@ -149,21 +149,21 @@ public class ComentarioFB {
         this.postSharesCount = postSharesCount;
     }
 
-    public String getLikesFromName() {
-        return likesFromName;
-    }
+//    public String getLikesFromName() {
+//        return likesFromName;
+//    }
+//
+//    public void setLikesFromName(String likesFromName) {
+//        this.likesFromName = likesFromName;
+//    }
 
-    public void setLikesFromName(String likesFromName) {
-        this.likesFromName = likesFromName;
-    }
-
-    public String getLikesFromId() {
-        return likesFromId;
-    }
-
-    public void setLikesFromId(String likesFromId) {
-        this.likesFromId = likesFromId;
-    }
+//    public String getLikesFromId() {
+//        return likesFromId;
+//    }
+//
+//    public void setLikesFromId(String likesFromId) {
+//        this.likesFromId = likesFromId;
+//    }
 
     public String getCommentsFromId() {
         return commentsFromId;
