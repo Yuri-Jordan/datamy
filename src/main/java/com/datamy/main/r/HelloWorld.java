@@ -18,9 +18,6 @@ public class HelloWorld {
             //instancia da classe de acesso aos dados da pagina cadastrada no banco
             //atribuição dos valores resgatados do banco pra realizar a consulta com r
             //na rede social
-//            RDao rdao = new RDao();            
-//            String token = rdao.select(id).getToken();
-//            String url = rdao.select(id).getUrl();
             
             RConnection con = new R().getRconexao();
             con.eval("source('C:/Users/yuri/Documents/Git"

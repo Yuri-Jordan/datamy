@@ -42,13 +42,8 @@ sentimental_analisys <- function(dataset_token, dataset_lexico){
             +
             nrow(filter(total_match, sentimento == "both"))
   
-  
-  
-  if(positivo == negativo){
-        maior_incidencia <- 2
-  }else{
-        maior_incidencia <- which.max(c(positivo, negativo, neutro))        
-  }
+  maior_incidencia <- which.max(c(positivo, negativo, neutro))        
+        
   avaliacao <- classificacao_string(maior_incidencia)
   
   return(avaliacao)

@@ -36,14 +36,14 @@ public class RDao extends ConexaoPGDao{
         }
     }
     
-    public RBean select(int id){
+    public RBean select(){
         RBean rbean = null;                
         CriarConexao();
         
         try {
             
-            preparacao = conexao.prepareStatement("SELECT * FROM RDB WHERE id=?");
-            preparacao.setInt(1, id);            
+            preparacao = conexao.prepareStatement("SELECT * FROM RDB");
+                      
             resultado = preparacao.executeQuery();                        
             
             while(resultado.next()){                

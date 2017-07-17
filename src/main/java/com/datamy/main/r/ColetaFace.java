@@ -6,6 +6,7 @@
 package com.datamy.main.r;
 
 import com.datamy.main.connection.connectionFactory.R;
+import com.datamy.main.dao.RDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.rosuda.REngine.REXPMismatchException;
@@ -17,19 +18,23 @@ import org.rosuda.REngine.Rserve.RserveException;
  * @author Yuri
  */
 public class ColetaFace {
-     public void coletar(String token) throws REXPMismatchException{
+     public void coletar() throws REXPMismatchException{
         
         try {
             //instancia da classe de acesso aos dados da pagina cadastrada no banco
             //atribuição dos valores resgatados do banco pra realizar a consulta com r
             //na rede social
-
+            
+            RDao rdao = new RDao();            
+            String token = rdao.select().getToken();
+            String url = rdao.select().getUrl();
+            
             RConnection con = new R().getRconexao();
             con.eval("source('C:/Users/yuri/Documents/Git"
                     + "/datamy/src/main/webapp/resources"
                     + "/R scripts/main.R')");
             
-            con.eval("main('" + token + "')");
+            con.eval("main('" + token + "','" + url + "')");
             con.close();
             
         } catch (RserveException ex) {

@@ -16,9 +16,10 @@ and open the template in the editor.
     <body>
         <h:form>
             <h:panelGrid>
-                <h:inputText value="#{coletaFaceMB.token}"/>
+                Token<h:inputText value="#{coletaFaceMB.token}"/>
+                Page<h:inputText value="#{coletaFaceMB.page}"/>
                 <h:commandButton value="Enviar" action="#{coletaFaceMB.coletar()}"/>
-                <h:outputText value="#{coletaFaceMB.resultado}"/>
+                
             </h:panelGrid>
         </h:form>
     </body>

@@ -1,6 +1,6 @@
 
 
-main <- function(token){
+main <- function(token, page){
       path <- "C:\\Users\\Yuri\\Documents\\Git\\datamy\\src\\main\\webapp\\resources\\R scripts"
       setwd(path)
       
@@ -9,7 +9,7 @@ main <- function(token){
       source(file = 'pds_posts_comments.R')
       source(file = 'conexao_postgres.R')
       
-      comentarios_post <- get_fb_dataset(token)
+      comentarios_post <- get_fb_dataset(token, page)
       dicionario <- get_compare_lexical_table()
       comentarios_avaliados <- avaliar_comentarios(comentarios_post, dicionario)
       dadosProntos <- tratarTabela(comentarios_avaliados)

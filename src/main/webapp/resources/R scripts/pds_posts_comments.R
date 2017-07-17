@@ -1,9 +1,7 @@
- get_fb_dataset <- function(token){
+ get_fb_dataset <- function(token, page){
   require(Rfacebook)
   
-  pages <- c("", "SKYBrasil")
-  
-  posts <- getPage(pages[2], token = token, n = 1, reactions = T)
+  posts <- getPage(page, token = token, n = 1, reactions = T)
   comments <- getPost(posts$id[1], token = token, n = 20)
   comments <- as.data.frame(comments, stringsAsFactors = F)
   

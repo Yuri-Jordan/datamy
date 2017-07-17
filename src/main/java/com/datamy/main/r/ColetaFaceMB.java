@@ -18,7 +18,7 @@ import org.rosuda.REngine.REXPMismatchException;
 public class ColetaFaceMB {
 
     private String token;
-    private String resultado;
+    private String page;
 
     public String getToken() {
         return token;
@@ -28,18 +28,19 @@ public class ColetaFaceMB {
         this.token = token;
     }
 
-    public String getResultado() {
-        return resultado;
+    public String getPage() {
+        return page;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+    public void setPage(String page) {
+        this.page = page;
     }
-    
+
+   
     public ColetaFaceMB() {
     }
     
     public void coletar() throws REXPMismatchException{
-        new ColetaFace().coletar(this.token);
+        //new ColetaFace().coletar(this.token, this.page);
     }
 }
