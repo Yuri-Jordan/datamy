@@ -1,8 +1,7 @@
- get_fb_dataset <- function(){
+ get_fb_dataset <- function(token){
   require(Rfacebook)
   
-  token <- "EAACEdEose0cBAGwjmjEc8mgT0wdmDbRCXHJTbVm4tZB6rZBI9eS5fZCcIRmPFpqfdhZAqGMIDo4PK2V1MNuhpO8VYYk1ou15xDrgsq3ZCSDucHgNLdZBqxTU1yEVFHFHPv1Qn6WPH1NKLFYLZBZCYJ9HCFOfltOceLxHSXOdliqPuni7hDm4jWNjYZCEXSwERyOkZD"
-  pages <- c("SKYBrasil", "UniversalPicturesBR")
+  pages <- c("", "SKYBrasil")
   
   posts <- getPage(pages[2], token = token, n = 1, reactions = T)
   comments <- getPost(posts$id[1], token = token, n = 20)
@@ -12,6 +11,7 @@
   
 }
 
+ 
 # # install.packages("Rfacebook", dependencies = T)
 # # install.packages("xlsx", dependencies = T)
 # require(Rfacebook)
@@ -28,7 +28,7 @@
 #            "uberbr",
 #            "natura.br",
 #            "CarrefourBR")
-# #pegar páginas
+# #pegar pï¿½ginas
 # posts <- getPage(pages[1], token = token, n = 10, reactions = T)
 # for(i in 2:length(pages)){
 #   posts <- merge(posts, getPage(pages[i], token = token, n = 10, reactions = T), all = T)
