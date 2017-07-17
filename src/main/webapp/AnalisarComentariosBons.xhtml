@@ -65,7 +65,8 @@
                                                 <td><h:outputText value="#{coment.postLikesCount}" /></td>
                                                 <td><h:outputText value="#{coment.postFromName}" /></td>                                                
                                                 <td><h:outputText value="#{coment.postCommentsCount}" /></td>
-                                                <td><h:outputText value="#{coment.commentsMessage}" /></td>                                                                                                                                                
+                                                <td><h:outputText value="#{coment.commentsMessage}" /></td> 
+                                                <td><h:inputHidden value="token" /></td>                                                 
                                             </tr>
                                             <tr>
                                                 <td>
@@ -79,13 +80,13 @@
                                                                 <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
                                                                 <br/>
 
-                                                                <p>Resposta: <h:inputText value="somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
-                                                                <p><a data-popup-close="popup-#{coment.commentsId}" href="#">Fechar</a><a data-popup-close="popup-#{coment.commentsId}" href="#">Publicar</a></p>
+                                                                <p>Resposta: <inputText  value="sadsadsad"/></p>
+                                                                <p><h:commandLink value="publish" action="#{comentario.responderComentario(coment.avaliacao, coment.commentsId, coment.commentsFromName)}"></h:commandLink></p>
                                                                 <p><h:commandLink title="marcar #{coment.commentsId}" action="#{comentario.marcarVisto(coment)}">Marcar como visto</h:commandLink></p>
 
                                                                 <a class="popup-close" data-popup-close="popup-#{coment.commentsId}" href="#">x</a>
                                                             </div>
-                                                        </div> 
+                                                        </div>                                                        
                                                     </h:form>
                                                 </td>
                                             </tr>
@@ -102,8 +103,7 @@
             ========================== -->
 
         </div>
-        <!-- /.container-fluid -->
-
+        <!-- /.container-fluid -->        
     </ui:define>
 
 </ui:composition>
