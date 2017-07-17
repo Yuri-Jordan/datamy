@@ -42,13 +42,15 @@ public class RDao extends ConexaoPGDao{
         
         try {
             
-            preparacao = conexao.prepareStatement("SELECT * FROM RDB");
+            preparacao = conexao.prepareStatement("SELECT * FROM rdb;");
                       
             resultado = preparacao.executeQuery();                        
             
             while(resultado.next()){                
-                dadosPagina.add(new RBean(resultado.getString("token"), resultado.getString("url")));
+                rbean = new RBean(resultado.getString("token"), resultado.getString("url"));
+                
             }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(RDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,10 +1,10 @@
  get_fb_dataset <- function(token, page){
   require(Rfacebook)
   
-  posts <- getPage(page, token = token, n = 1, reactions = T)
-  comments <- getPost(posts$id[1], token = token, n = 20)
-  comments <- as.data.frame(comments, stringsAsFactors = F)
-  
+       posts <- getPage(page, token = token, n = 1, reactions = T)
+       comments <- getPost(posts$id[1], token = token)
+       comments <- as.data.frame(comments, stringsAsFactors = F)
+       
   return(comments)
   
 }

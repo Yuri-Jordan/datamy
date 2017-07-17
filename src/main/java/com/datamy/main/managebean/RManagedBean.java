@@ -7,8 +7,11 @@ package com.datamy.main.managebean;
 
 import com.datamy.main.bean.RBean;
 import com.datamy.main.dao.RDao;
+import com.datamy.main.r.ColetaFace;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.rosuda.REngine.REXPMismatchException;
 
 /**
  *
@@ -16,7 +19,8 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name="r")
 @SessionScoped
-public class RManagedBean {
+public class RManagedBean{
+    private static final long serialVersionUID = 1L;
     private RDao rd;
     private RBean rb;
     
@@ -30,6 +34,10 @@ public class RManagedBean {
         return "home.xhtml";
     }
 
+    public void coletar() throws REXPMismatchException{
+        ColetaFace cf = new ColetaFace();
+        cf.coletar();
+    }
     public RBean getRb() {
         return rb;
     }

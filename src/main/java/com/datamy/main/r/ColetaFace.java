@@ -5,6 +5,7 @@
  */
 package com.datamy.main.r;
 
+import com.datamy.main.bean.RBean;
 import com.datamy.main.connection.connectionFactory.R;
 import com.datamy.main.dao.RDao;
 import java.util.logging.Level;
@@ -26,8 +27,9 @@ public class ColetaFace {
             //na rede social
             
             RDao rdao = new RDao();            
-            String token = rdao.select().getToken();
-            String url = rdao.select().getUrl();
+            RBean rb = rdao.select();
+            String token = rb.getToken();
+            String url = rb.getUrl();
             
             RConnection con = new R().getRconexao();
             con.eval("source('C:/Users/yuri/Documents/Git"
