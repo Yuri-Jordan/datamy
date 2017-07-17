@@ -44,14 +44,15 @@ public class ComentarioFBManagedBean implements Serializable {
     
     public void responderComentario(String token, String msgID, String from){
         token = "EAAGGa3sZCv6YBAOOccEqeJBKCyqpjQfWeJ0eeAuwKQlQMMA8IZBA21YBU75b11I23Yoe8PHtLTEp6CC3gpVUTjRoNfZCxll42hwIngyWZCAtfwhbD74pwkRVPngS0vIPfqm7hFLP0vkJwSrR7gccfEvtfPANHMqkV4S73LEgFPTwSJBSI12bEZBdqIw6EIIwejah2uNOusgZDZD";
-        msgID = "1876454072620088_1876454199286742/comments";
+        msgID = "1876454072620088_1876454199286742";
         from = "Pablo Araujo";
         Tag tag = new Tag();
         tag.setName(from);
         
         FacebookClient fbCli = new DefaultFacebookClient(token);
-        fbCli.publish(msgID, String.class, Parameter.with("message", tag.getName()+", entregamos em sua casa!"));
+        fbCli.publish(msgID+"/coomments", String.class, Parameter.with("message", tag.getName()+", entregamos em sua casa!"));
     }
+    
     public ArrayList<ComentarioFB> listarComentariosRuins() {
         return comentario_fb_dao.selectRuins();
     }
