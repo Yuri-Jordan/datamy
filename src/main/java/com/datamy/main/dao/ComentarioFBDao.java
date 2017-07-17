@@ -33,7 +33,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
 
         try {
 
-            preparacao = conexao.prepareStatement("SELECT * FROM comentario_fb_avaliados WHERE post.id = ?");
+            preparacao = conexao.prepareStatement("SELECT * FROM novo WHERE post.id = ?");
             //preparacao.setString(1, coment.getId());
             resultado = preparacao.executeQuery();
 
@@ -78,7 +78,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
         CriarConexao();
 
         try {
-            resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'negative' AND visto = 'false'");
+            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'negative' AND visto = 'false'");
             while (resultado.next()) {
                 comentarios_fb_lista.add(new ComentarioFB(
                         resultado.getString("row.names"),
@@ -120,7 +120,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
         CriarConexao();
 
         try {
-            resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'neutral' AND visto = 'false'");
+            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'neutral' AND visto = 'false'");
             while (resultado.next()) {
                 comentarios_fb_lista.add(new ComentarioFB(
                         resultado.getString("row.names"),
@@ -162,7 +162,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
         CriarConexao();
 
         try {
-            resultado = consulta.executeQuery("SELECT * FROM comentario_fb_avaliados WHERE avaliacao = 'positive' AND visto = 'false'");
+            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'positive' AND visto = 'false'");
             while (resultado.next()) {
                 comentarios_fb.add(new ComentarioFB(
                         resultado.getString("row.names"),
@@ -253,7 +253,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
     public void marcarVisto(ComentarioFB id) {
         CriarConexao();
         try {
-            String sql = "UPDATE comentario_fb_avaliados SET visto=true WHERE comments.id=?";
+            String sql = "UPDATE novo SET visto=true WHERE comments.id=?";
 
             preparacao = conexao.prepareStatement(sql);               
             preparacao.setString(1, id.getCommentsId());                        
