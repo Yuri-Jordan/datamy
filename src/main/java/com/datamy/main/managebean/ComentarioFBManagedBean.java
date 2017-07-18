@@ -9,6 +9,7 @@ import com.datamy.main.bean.ComentarioFB;
 import com.datamy.main.bean.RespostasBot;
 import com.datamy.main.bean.Usuario;
 import com.datamy.main.dao.ComentarioFBDao;
+import com.datamy.main.dao.RDao;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -41,19 +42,30 @@ public class ComentarioFBManagedBean implements Serializable {
         this.comentario_fb = new ComentarioFB();
         this.user = new Usuario();
     }
-    
-    public void responderComentario(String token, String msgID, String from){
-        token = "EAAGGa3sZCv6YBAOOccEqeJBKCyqpjQfWeJ0eeAuwKQlQMMA8IZBA21YBU75b11I23Yoe8PHtLTEp6CC3gpVUTjRoNfZCxll42hwIngyWZCAtfwhbD74pwkRVPngS0vIPfqm7hFLP0vkJwSrR7gccfEvtfPANHMqkV4S73LEgFPTwSJBSI12bEZBdqIw6EIIwejah2uNOusgZDZD";
-        msgID = "1876454072620088_1876454199286742";
-        from = "Pablo Araujo";
+
+    public void responderComentario(String token, ComentarioFB coment, String msgID, String from, String msgComent) {
+        marcarVisto(coment);
+//token = "EAACEdEose0cBAPn7pXwOvAdEw8ZB6nX25T1Acub7Tymwrn5WBZCJlePovc7XoJQYq4toJL8wZBrZBdpJYPxdPYHAnMtzs9LQhcccZB5qHWGUd9d8JKLcT5pPBp5DImeAZCE8ZCKezmuXEeun5wVy88U9ZAWc86Mj4JONpggj0yVfhiokRJxafpvJPoI0hm3QbREiqasPS3CNnQZDZD";
+        RDao rd = new RDao();
+        token = rd.select().getToken();
+        msgID = msgID + "/comments";
         Tag tag = new Tag();
         tag.setName(from);
-        
+        String m1, m2, m3;
+        m1 = "Obrigado pela avaliação!";
+        m2 = "Tentaremos ao maximo proporcionar os melhores produtos para nossos clientes!";
+        if (msgComent.split(" ").length < 3) {
+            m3 = m1;
+        } else {
+            m3 = m2;
+        }
+
         FacebookClient fbCli = new DefaultFacebookClient(token);
-        fbCli.publish(msgID+"/coomments", String.class, Parameter.with("message", tag.getName()+", entregamos em sua casa!"));
-        marcarVisto(coment);
+        fbCli.publish(msgID, String.class, Parameter.with("message", tag.getName() + ", " + m3));
+
+        m3 = "";
     }
-    
+
     public ArrayList<ComentarioFB> listarComentariosRuins() {
         return comentario_fb_dao.selectRuins();
     }
