@@ -41,7 +41,7 @@ salvarBanco <- function(comentarios_avaliados){
                        user = "postgres", password = '123')
       
       # writes df to the PostgreSQL database "postgres", table "cartable" 
-      dbWriteTable(con, "novo1", value = comentarios_avaliados, append = T)
+      dbWriteTable(con, "novo", value = comentarios_avaliados, append = T)
       dbDisconnect(con)
       dbUnloadDriver(driver)
 }
