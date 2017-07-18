@@ -51,6 +51,7 @@ public class ComentarioFBManagedBean implements Serializable {
         
         FacebookClient fbCli = new DefaultFacebookClient(token);
         fbCli.publish(msgID+"/coomments", String.class, Parameter.with("message", tag.getName()+", entregamos em sua casa!"));
+        marcarVisto(coment);
     }
     
     public ArrayList<ComentarioFB> listarComentariosRuins() {
