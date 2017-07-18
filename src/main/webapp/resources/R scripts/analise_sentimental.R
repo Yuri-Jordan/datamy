@@ -6,6 +6,7 @@ avaliar_comentarios <- function(dataset, dicionario){
     classificacao <- sentimental_analisys(dataset_token =  token, 
                                           dataset_lexico  =  dicionario)
     dataset$avaliacao[i] <- classificacao
+    dataset$visto[i] <- 'false'
     
   }
   return(dataset)

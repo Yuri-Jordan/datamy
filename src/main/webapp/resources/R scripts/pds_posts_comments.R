@@ -1,13 +1,27 @@
  get_fb_dataset <- function(token, page){
   require(Rfacebook)
-  
-       posts <- getPage(page, token = token, n = 1, reactions = T)
-       comments <- getPost(posts$id[1], token = token)
+            data <- as.POSIXct('2014/07/12', tz = 'UTC')
+       posts <- getPage(page, token = token, reactions = T, feed = T, since = data)
+       
+       
+       comments <- get_all_comments(posts, token)
        comments <- as.data.frame(comments, stringsAsFactors = F)
        
   return(comments)
   
-}
+ }
+ 
+ get_all_comments <- function(posts, token){
+       
+       novo <- getPost(posts$id[1],token = token,comments = T)
+       for(i in 2:nrow(posts)){
+             novo <- merge(novo, (getPost(posts$id[i], 
+                                          token = token, 
+                                          comments = T)), all = T ) 
+       }
+       novo <- as.data.frame(novo, stringsAsFactors = F)   
+       return(novo)
+ }
 
  
 # # install.packages("Rfacebook", dependencies = T)
