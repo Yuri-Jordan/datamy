@@ -1,8 +1,11 @@
  get_fb_dataset <- function(token, page){
-  require(Rfacebook)
-            data <- as.POSIXct('2014/07/12', tz = 'UTC')
-       posts <- getPage(page, token = token, reactions = T, feed = T, since = data)
        
+       # token <- 'EAACEdEose0cBAOrofqx6QpCmkp6CKBiets8cFAJ3O946dZCULfZCmWrGSM8XrYeA12I7FGxMZAUD6eDQUkazXbmLJTKRZCBeE5gGTIphRGf29ppq0N9GUpU2pKVbanbkZCZAq1NLlTa8afZACZBUfhQ5HmeTBBYcbf7YmZBuPZBwZC9Irw1JEX7ZBBiGZCIVB2ZBMyqnEZD'
+       # page <- 'SKYbrasil'
+       
+  require(Rfacebook)
+            # data <- as.POSIXct('2016/07/12', tz = 'UTC')
+       posts <- getPage(page = page, token = token, reactions = T)
        
        comments <- get_all_comments(posts, token)
        comments <- as.data.frame(comments, stringsAsFactors = F)
@@ -12,14 +15,18 @@
  }
  
  get_all_comments <- function(posts, token){
+      
+       novo <- getPost(post = posts$id[1], token = token, likes = F)
+       novo <- novo$comments
        
-       novo <- getPost(posts$id[1],token = token,comments = T)
        for(i in 2:nrow(posts)){
-             novo <- merge(novo, (getPost(posts$id[i], 
-                                          token = token, 
-                                          comments = T)), all = T ) 
+             if(!is.na(posts$id[i])){
+                   aux <- getPost(post = posts$id[i], token = token, likes = F)
+                   
+                   # aux <- ldply(aux, data.frame)
+                   novo <- merge(novo, aux$comments, all = T)
+             }
        }
-       novo <- as.data.frame(novo, stringsAsFactors = F)   
        return(novo)
  }
 

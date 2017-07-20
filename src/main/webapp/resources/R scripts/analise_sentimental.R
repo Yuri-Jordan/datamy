@@ -17,7 +17,7 @@ tokenize_message <- function(dataset){
       
       require(stringr)
       
-      only_text <- dataset$comments.message
+      only_text <- dataset$message
       
       text_without_punctuation <- gsub(pattern = "[[:punct:]]","",only_text)
       text_without_controlChar <- gsub(pattern = "[[:cntrl:]]","",text_without_punctuation)
