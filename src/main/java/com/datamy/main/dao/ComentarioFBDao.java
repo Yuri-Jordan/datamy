@@ -8,6 +8,7 @@ package com.datamy.main.dao;
 import com.datamy.main.bean.ComentarioFB;
 import com.datamy.main.bean.RespostasBot;
 import com.datamy.main.connection.connectionFactory.ConexaoPGDao;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -180,7 +181,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
 //                        resultado.getString("likes.from_id"),
                         resultado.getString("comments.from_id"),
                         resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
+                        resultado.getString("comments.message"),                        
                         resultado.getString("comments.created_time"),
                         resultado.getString("comments.likes_count"),
                         resultado.getString("comments.comments_count"),

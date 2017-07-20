@@ -16,6 +16,8 @@ import com.restfb.Parameter;
 import com.restfb.types.Conversation.Tag;
 import com.restfb.types.FacebookType;
 import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -74,8 +76,31 @@ public class ComentarioFBManagedBean implements Serializable {
         return comentario_fb_dao.selectNeutros();
     }
 
-    public ArrayList<ComentarioFB> listarComentariosBons() {
-        return comentario_fb_dao.selectBons();
+    public ArrayList<ComentarioFB> listarComentariosBons() {  
+        ArrayList<ComentarioFB> comentarios = new ArrayList<ComentarioFB>();
+        ArrayList<ComentarioFB> comentarios2 = new ArrayList<ComentarioFB>();
+        comentarios = comentario_fb_dao.selectBons();
+        
+        for (ComentarioFB s: comentarios){
+            
+            byte[] bytesv = s.getCommentsMessage().getBytes();
+            String v = new String( bytesv, Charset.forName("UTF-8") );
+            
+            byte[] bytesw = s.getCommentsFromName().getBytes();
+            String w = new String( bytesw, Charset.forName("UTF-8") );
+
+//            byte[] bytes = s.getPostMessage().getBytes();
+//            String x = new String( bytes, Charset.forName("UTF-8") );
+
+            s.setCommentsMessage(v); 
+            
+            s.setCommentsFromName(w);
+
+//            s.setPostMessage(x);
+
+            comentarios2.add(s);
+        }
+        return comentarios2;
     }
 
     public ArrayList<RespostasBot> getRespostas() {
