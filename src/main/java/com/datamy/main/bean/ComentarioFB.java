@@ -5,11 +5,14 @@
  */
 package com.datamy.main.bean;
 
+import java.nio.charset.Charset;
+
 /**
  *
  * @author pablo
  */
-public class ComentarioFB {           
+public class ComentarioFB {
+
     String rowNames;
     String postFromId;
     String postFromName;
@@ -18,6 +21,7 @@ public class ComentarioFB {
     String postType;
     String postLink;
     String postId;
+    String postIdFormatado;
     String postLikesCount;
     String postCommentsCount;
     String postSharesCount;
@@ -85,7 +89,7 @@ public class ComentarioFB {
         this.postFromName = postFromName;
     }
 
-    public String getPostMessage() {
+    public String getPostMessage() {                       
         return postMessage;
     }
 
@@ -156,7 +160,6 @@ public class ComentarioFB {
 //    public void setLikesFromName(String likesFromName) {
 //        this.likesFromName = likesFromName;
 //    }
-
 //    public String getLikesFromId() {
 //        return likesFromId;
 //    }
@@ -164,7 +167,6 @@ public class ComentarioFB {
 //    public void setLikesFromId(String likesFromId) {
 //        this.likesFromId = likesFromId;
 //    }
-
     public String getCommentsFromId() {
         return commentsFromId;
     }
@@ -235,6 +237,16 @@ public class ComentarioFB {
 
     public void setVisto(String visto) {
         this.visto = visto;
-    }           
-    
+    }
+
+    public String getPostIdFormatado() {
+        String[] a = postId.split("_");
+        postIdFormatado = a[1];
+        return postIdFormatado;
+    }
+
+    public void setPostIdFormatado(String postIdFormatado) {
+        this.postIdFormatado = postIdFormatado;
+    }        
+
 }

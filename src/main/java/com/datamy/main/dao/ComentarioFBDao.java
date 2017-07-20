@@ -9,6 +9,7 @@ import com.datamy.main.bean.ComentarioFB;
 import com.datamy.main.bean.RespostasBot;
 import com.datamy.main.connection.connectionFactory.ConexaoPGDao;
 import java.nio.charset.Charset;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,7 +53,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
                         resultado.getString("post.comments_count"),
                         resultado.getString("post.shares_count"),
                         //resultado.getString("likes.from_name"),
-//                        resultado.getString("likes_from_id"),
+                        //                        resultado.getString("likes_from_id"),
                         resultado.getString("comments.from_id"),
                         resultado.getString("comments.from_name"),
                         resultado.getString("comments.message"),
@@ -75,129 +76,21 @@ public class ComentarioFBDao extends ConexaoPGDao {
     }
 
     public ArrayList<ComentarioFB> selectRuins() {
-        ArrayList<ComentarioFB> comentarios_fb_lista = new ArrayList<ComentarioFB>();
-        CriarConexao();
-
-        try {
-            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'negative' AND visto = 'false'");
-            while (resultado.next()) {
-                comentarios_fb_lista.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        //resultado.getString("3.from_name"),
-//                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
-                        resultado.getString("avaliacao"),
-                        resultado.getString("visto")
-                ));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ComentarioFBDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            fecharConexao();
-        }
-
-        return comentarios_fb_lista;
+        ArrayList<ComentarioFB> comentarios_fb_ruins = new ArrayList<ComentarioFB>();
+        parametrizar(resultado, comentarios_fb_ruins, "negative");
+        return comentarios_fb_ruins;
     }
 
     public ArrayList<ComentarioFB> selectNeutros() {
-        ArrayList<ComentarioFB> comentarios_fb_lista = new ArrayList<ComentarioFB>();
-        CriarConexao();
-
-        try {
-            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'neutral' AND visto = 'false'");
-            while (resultado.next()) {
-                comentarios_fb_lista.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        //resultado.getString("likes.from_name"),
-//                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
-                        resultado.getString("avaliacao"),
-                        resultado.getString("visto")
-                ));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ComentarioFBDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            fecharConexao();
-        }
-
-        return comentarios_fb_lista;
+        ArrayList<ComentarioFB> comentarios_fb_neutros = new ArrayList<ComentarioFB>();        
+        parametrizar(resultado, comentarios_fb_neutros, "neutral");
+        return comentarios_fb_neutros;
     }
 
     public ArrayList<ComentarioFB> selectBons() {
-        comentarios_fb = new ArrayList<ComentarioFB>();
-        CriarConexao();
-
-        try {
-            resultado = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = 'positive' AND visto = 'false'");
-            while (resultado.next()) {
-                comentarios_fb.add(new ComentarioFB(
-                        resultado.getString("row.names"),
-                        resultado.getString("post.from_id"),
-                        resultado.getString("post.from_name"),
-                        resultado.getString("post.message"),
-                        resultado.getString("post.created_time"),
-                        resultado.getString("post.type"),
-                        resultado.getString("post.link"),
-                        resultado.getString("post.id"),
-                        resultado.getString("post.likes_count"),
-                        resultado.getString("post.comments_count"),
-                        resultado.getString("post.shares_count"),
-                        //resultado.getString("likes.from_name"),
-//                        resultado.getString("likes.from_id"),
-                        resultado.getString("comments.from_id"),
-                        resultado.getString("comments.from_name"),
-                        resultado.getString("comments.message"),                        
-                        resultado.getString("comments.created_time"),
-                        resultado.getString("comments.likes_count"),
-                        resultado.getString("comments.comments_count"),
-                        resultado.getString("comments.id"),
-                        resultado.getString("avaliacao"),
-                        resultado.getString("visto")
-                ));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ComentarioFBDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            fecharConexao();
-        }
-
-        return comentarios_fb;
+        ArrayList<ComentarioFB> comentarios_fb_positivos = new ArrayList<ComentarioFB>();
+        parametrizar(resultado, comentarios_fb_positivos, "positive");
+        return comentarios_fb_positivos;
     }
 
     public ArrayList<RespostasBot> aceitarResposta() {
@@ -256,10 +149,50 @@ public class ComentarioFBDao extends ConexaoPGDao {
         try {
             String sql = "UPDATE novo SET visto=true WHERE comments.id=?";
 
-            preparacao = conexao.prepareStatement(sql);               
-            preparacao.setString(1, id.getCommentsId());                        
+            preparacao = conexao.prepareStatement(sql);
+            preparacao.setString(1, id.getCommentsId());
             preparacao.executeUpdate();
-            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ComentarioFBDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            fecharConexao();
+        }
+    }
+
+    public void parametrizar(ResultSet rs, ArrayList<ComentarioFB> lista, String avaliacao) {
+        CriarConexao();
+
+        try {
+            rs = consulta.executeQuery("SELECT * FROM novo WHERE avaliacao = '"+avaliacao+"' AND visto = 'false'");
+//            System.out.println("QUERY  "+rs);
+            while (rs.next()) {
+                lista.add(new ComentarioFB(
+                        rs.getString("row.names"),
+                        rs.getString("post.from_id"),
+                        rs.getString("post.from_name"),
+                        rs.getString("post.message"),
+                        rs.getString("post.created_time"),
+                        rs.getString("post.type"),
+                        rs.getString("post.link"),
+                        rs.getString("post.id"),
+                        rs.getString("post.likes_count"),
+                        rs.getString("post.comments_count"),
+                        rs.getString("post.shares_count"),
+                        //resultado.getString("likes.from_name"),
+                        //                        resultado.getString("likes.from_id"),
+                        rs.getString("comments.from_id"),
+                        rs.getString("comments.from_name"),
+                        rs.getString("comments.message"),
+                        rs.getString("comments.created_time"),
+                        rs.getString("comments.likes_count"),
+                        rs.getString("comments.comments_count"),
+                        rs.getString("comments.id"),
+                        rs.getString("avaliacao"),
+                        rs.getString("visto")
+                ));
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ComentarioFBDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

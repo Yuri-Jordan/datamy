@@ -6,10 +6,12 @@
 package com.datamy.main.managebean;
 
 import com.datamy.main.bean.ComentarioFB;
+import com.datamy.main.bean.Resposta;
 import com.datamy.main.bean.RespostasBot;
 import com.datamy.main.bean.Usuario;
 import com.datamy.main.dao.ComentarioFBDao;
 import com.datamy.main.dao.RDao;
+import com.datamy.main.dao.RespostaDAO;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -45,59 +47,59 @@ public class ComentarioFBManagedBean implements Serializable {
         this.user = new Usuario();
     }
 
-    public void responderComentario(String token, ComentarioFB coment, String msgID, String from, String msgComent) {
+    public void responderComentario(String token, ComentarioFB coment, String msgID, String from, String msgComent, int id) {
         marcarVisto(coment);
-//token = "EAACEdEose0cBAPn7pXwOvAdEw8ZB6nX25T1Acub7Tymwrn5WBZCJlePovc7XoJQYq4toJL8wZBrZBdpJYPxdPYHAnMtzs9LQhcccZB5qHWGUd9d8JKLcT5pPBp5DImeAZCE8ZCKezmuXEeun5wVy88U9ZAWc86Mj4JONpggj0yVfhiokRJxafpvJPoI0hm3QbREiqasPS3CNnQZDZD";
         RDao rd = new RDao();
         token = rd.select().getToken();
         msgID = msgID + "/comments";
         Tag tag = new Tag();
         tag.setName(from);
-        String m1, m2, m3;
-        m1 = "Obrigado pela avaliação!";
-        m2 = "Tentaremos ao maximo proporcionar os melhores produtos para nossos clientes!";
-        if (msgComent.split(" ").length < 3) {
-            m3 = m1;
-        } else {
-            m3 = m2;
-        }
+        
+        RespostaDAO rDao = new RespostaDAO();
+        Resposta r = new Resposta();
+        r = rDao.select(id);
+        String resposta = r.getTextoResposta();
 
         FacebookClient fbCli = new DefaultFacebookClient(token);
-        fbCli.publish(msgID, String.class, Parameter.with("message", tag.getName() + ", " + m3));
+        fbCli.publish(msgID, String.class, Parameter.with("message", tag.getName() + ", " + resposta));
 
-        m3 = "";
+        resposta = "";
     }
 
     public ArrayList<ComentarioFB> listarComentariosRuins() {
-        return comentario_fb_dao.selectRuins();
+        ArrayList<ComentarioFB> comentariosRuins = new ArrayList<ComentarioFB>();
+        comentariosRuins =  comentario_fb_dao.selectRuins();
+        return formatarTexto(comentariosRuins);
     }
 
     public ArrayList<ComentarioFB> listarComentariosNeutros() {
-        return comentario_fb_dao.selectNeutros();
+        ArrayList<ComentarioFB> comentariosNeutros = new ArrayList<ComentarioFB>();
+        comentariosNeutros = comentario_fb_dao.selectNeutros();
+        return formatarTexto(comentariosNeutros);
     }
 
-    public ArrayList<ComentarioFB> listarComentariosBons() {  
+    public ArrayList<ComentarioFB> listarComentariosBons() {
         ArrayList<ComentarioFB> comentarios = new ArrayList<ComentarioFB>();
+        comentarios = comentario_fb_dao.selectBons();                        
+        return formatarTexto(comentarios);
+    }
+    
+    public ArrayList<ComentarioFB> formatarTexto(ArrayList<ComentarioFB> listaComentarios){
         ArrayList<ComentarioFB> comentarios2 = new ArrayList<ComentarioFB>();
-        comentarios = comentario_fb_dao.selectBons();
         
-        for (ComentarioFB s: comentarios){
+        for (ComentarioFB s : listaComentarios) {
+
+            String v = new String(s.getCommentsMessage().getBytes(), Charset.forName("UTF-8"));
+            String w = new String(s.getCommentsFromName().getBytes(), Charset.forName("UTF-8"));
+
+            if (s.getPostMessage() != null) {
+                String a = new String(s.getPostMessage().getBytes(), Charset.forName("UTF-8"));
+                s.setPostMessage(a);
+            }
+
+            s.setCommentsMessage(v);
+            s.setCommentsFromName(w);            
             
-            byte[] bytesv = s.getCommentsMessage().getBytes();
-            String v = new String( bytesv, Charset.forName("UTF-8") );
-            
-            byte[] bytesw = s.getCommentsFromName().getBytes();
-            String w = new String( bytesw, Charset.forName("UTF-8") );
-
-//            byte[] bytes = s.getPostMessage().getBytes();
-//            String x = new String( bytes, Charset.forName("UTF-8") );
-
-            s.setCommentsMessage(v); 
-            
-            s.setCommentsFromName(w);
-
-//            s.setPostMessage(x);
-
             comentarios2.add(s);
         }
         return comentarios2;
@@ -116,13 +118,6 @@ public class ComentarioFBManagedBean implements Serializable {
         return "AnalisarComentariosBons.xhtml";
     }
 
-//    public void formularResposta(ComentarioFB coment){
-//        try {
-//        	comentario_fb_dao.formular(coment);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ComentarioFBManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
     public ComentarioFB getComentario_fb() {
         return comentario_fb;
     }
