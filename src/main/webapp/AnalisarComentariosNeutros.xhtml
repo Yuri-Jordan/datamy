@@ -76,7 +76,9 @@
                                                                     <h:selectOneRadio value="#{resposta.resposta.id}">
                                                                         <f:selectItems value="#{resposta.select()}" var="c"
                                                                                        itemLabel="#{c.textoResposta}" itemValue="#{c.id}" />
+                                                                        
                                                                     </h:selectOneRadio>
+                                                                    <br/>
                                                                     <h:inputText class="form-control" value="#{resposta.resposta.textoResposta}"/>
                                                                     <p class="help-block">Resposta personalizada</p>
                                                                 </p>
