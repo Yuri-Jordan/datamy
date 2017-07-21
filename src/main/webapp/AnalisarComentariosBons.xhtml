@@ -39,7 +39,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="glyphicon glyphicon-phone-alt"></i> Comentarios  do Facebook</h3>
+                            <h3 class="panel-title"><i class="fa fa-facebook-square"></i> Comentarios  do Facebook</h3>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -61,9 +61,7 @@
                                                 <td><h:outputText value="#{coment.postFromName}" /></td>                                                
                                                 <td><h:outputText value="#{coment.postCommentsCount}" /></td>
                                                 <td><h:outputText value="#{coment.commentsMessage}" /></td> 
-                                                <td><h:inputHidden value="token" /></td>                                                 
-                                            </tr>
-                                            <tr>
+                                                <td><h:inputHidden value="token" /></td>    
                                                 <td>
                                                     <h:form>
                                                         <a class="btn" data-popup-open="popup-#{coment.commentsId}" href="#">Responder</a>
@@ -93,6 +91,7 @@
                                                     </h:form>
                                                 </td>
                                             </tr>
+                         
                                         </ui:repeat>                                               
                                     </tbody>
                                 </table>

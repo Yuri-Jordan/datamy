@@ -38,32 +38,21 @@
                             <h:inputText class="form-control" value="#{chamado.chamado.titulo}"/>
                             <p class="help-block">Titulo</p>
                         </div>
+                        
+                        <div class="form-group">
+                            <br/>
+                            <label>Mensagem:</label>                                
+                            <h:inputText class="form-control" value="#{chamado.chamado.titulo}"/>
+                            <p class="help-block">Mensagem</p>
+                        </div>
 
                         <div class="form-group">
                             <label>Documentação</label>                                
                             <h:inputFile />
                             <p class="help-block">caso seja necessário.</p>
                         </div>
-
-                        <div class="form-group">
-                            <label>Tipo de problema</label>
-                            <h:selectOneMenu class="form-control" value="#{chamado.chamado.tipo}">
-                                <f:selectItem itemValue="Pagamento" itemLabel="Pagamento" />
-                                <f:selectItem itemValue="Gerar gráficos" itemLabel="Gerar gráficos" />	   							
-                                <f:selectItem itemValue="Impressão de relatórios" itemLabel="Impressão de relatórios" />	   							
-                                <f:selectItem itemValue="Atualização de dados" itemLabel="Atualização de dados" />	   							
-                                <f:selectItem itemValue="Conta" itemLabel="Conta" />	   							
-                                <f:selectItem itemValue="Outro" itemLabel="Outro" />	   							
-                            </h:selectOneMenu>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Mensagem</label>
-                            <h:inputTextarea class="form-control" rows="3" value="#{chamado.chamado.descricao}"/>                                    
-                        </div>
-
-                        <h:commandButton class="btn btn-default" value="Enviar" action="#{chamado.criarChamado()}"/>
+                      
+                        <h:commandButton class="btn btn-raised btn-info" value="Enviar" action="#{chamado.criarChamado()}"/>
                     </h:form>
                 </div>
 
