@@ -1,7 +1,7 @@
 
 
 main <- function(token, page){
-      path <- "C:\\Users\\Yuri\\Documents\\Git\\datamy\\src\\main\\webapp\\resources\\R scripts"
+      path <- "C:\\Users\\pablo\\OneDrive\\Documentos\\NetBeansProjects\\datamy\\datamy\\src\\main\\webapp\\resources\\R scripts"
       setwd(path)
       
       source(file = 'Dicionario/traducao_pct_sentimentos.R')

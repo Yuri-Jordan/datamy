@@ -38,7 +38,7 @@ salvarBanco <- function(comentarios_avaliados){
       
       con <- dbConnect(driver, dbname = "datamy",
                        host = "localhost", port = 5432,
-                       user = "postgres", password = '123')
+                       user = "postgres", password = '12345')
       
       # writes df to the PostgreSQL database "postgres", table "cartable" 
       dbWriteTable(con, "novo", value = comentarios_avaliados, append = T)

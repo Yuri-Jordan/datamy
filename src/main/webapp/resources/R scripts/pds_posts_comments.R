@@ -5,7 +5,7 @@ get_fb_dataset <- function(token, page){
       # 
       require(Rfacebook)
       # data <- as.POSIXct('2016/07/12', tz = 'UTC')
-      posts <- getPage(page = page, token = token, reactions = T)
+      posts <- getPage(page = page, token = token, reactions = T, api = 'v2.8')
       
       comments <- get_all_comments(posts, token)
       comments <- as.data.frame(comments, stringsAsFactors = F)
@@ -17,14 +17,14 @@ get_fb_dataset <- function(token, page){
 
 get_all_comments <- function(posts, token){
       
-      lista <- getPost(post = posts$id[1], token = token, likes = F)
+      lista <- getPost(post = posts$id[1], token = token, likes = F, api = 'v2.8')
       novo <- data.frame(lista$post, lista$comments, check.names = T)
       
       for(i in 2:nrow(posts)){
             
             if(!is.na(posts$id[i])){
                   
-                  aux <- getPost(post = posts$id[i], token = token, likes = F)
+                  aux <- getPost(post = posts$id[i], token = token, likes = F, api = 'v2.8')
                   aux <- data.frame(aux$post, aux$comments, check.names = T)
                   # aux <- ldply(aux, data.frame)
                   novo <- merge(aux, novo, all = T)

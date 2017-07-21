@@ -32,9 +32,7 @@ public class ColetaFace {
             String url = rb.getUrl();
             
             RConnection con = new R().getRconexao();
-            con.eval("source('C:/Users/yuri/Documents/Git"
-                    + "/datamy/src/main/webapp/resources"
-                    + "/R scripts/main.R')");
+            con.eval("source('C:/Users/pablo/OneDrive/Documentos/NetBeansProjects/datamy/datamy/src/main/webapp/resources/R scripts/main.R')");
             
             con.eval("main('" + token + "','" + url + "')");
             con.close();
