@@ -43,7 +43,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped">
+                                <table id="comentarios" class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
                                             <th>Mensagem do post</th>
@@ -64,7 +64,7 @@
                                                 <td><h:inputHidden value="token" /></td>    
                                                 <td>
                                                     <h:form>
-                                                        <a class="btn-primary btn-large" data-popup-open="popup-#{coment.commentsId}" href="#">Responder</a>
+                                                        <a class="btn colect-data-btn" data-popup-open="popup-#{coment.commentsId}" href="#">Responder</a>
 
                                                         <div class="popup" data-popup="popup-#{coment.commentsId}">
                                                             <div class="popup-inner">                                                                                                                                
@@ -73,25 +73,25 @@
                                                                 <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
                                                                 <br/>
 
-                                                                <p>Resposta: 
-                                                                    <h5>Selecionar resposta</h5> 
-                                                                    <ui:repeat value="#{resposta.select()}" var="resp">
-                                                                        <h:selectManyCheckbox value = "Respostas">
-                                                                            <f:selectItem itemValue = "#{resp.id}" itemLabel = "#{resp.textoResposta}" />                                                                        
-                                                                        </h:selectManyCheckbox>
-                                                                    </ui:repeat>
-
+                                                                <p>
+                                                                    <h5>Selecionar resposta</h5>                                                                    
+                                                                    <h:selectOneRadio value="#{resposta.resposta.id}">
+                                                                        <f:selectItems value="#{resposta.select()}" var="c"
+                                                                                       itemLabel="#{c.textoResposta}" itemValue="#{c.id}" />
+                                                                    </h:selectOneRadio>
+                                                                    <h:inputText class="form-control" value="#{resposta.resposta.textoResposta}"/>
+                                                                    <p class="help-block">Resposta personalizada</p>
                                                                 </p>
-                                                                <p><h:commandButton class="btn btn-default" value="Publicar" action="#{comentario.responderComentario(coment.avaliacao, coment , coment.commentsId, coment.commentsFromName, coment.commentsMessage, resp.id)}"></h:commandButton>
-                                                                    <h:commandButton class="btn btn-default" value="Marcar como visto" action="#{comentario.marcarVisto(coment)}"></h:commandButton></p>
-                                                                    <p><a target="blank" href="https://www.facebook.com/pizzadacasadelivery/posts/#{coment.postIdFormatado}"><h4 align="right">Ir para a publicação</h4></a></p>
+                                                                <p><h:commandButton class="btn colect-data-btn" value="Publicar" action="#{comentario.responderComentario(resposta.resposta.textoResposta, coment , coment.commentsId, coment.commentsFromName, coment.commentsMessage, resposta.resposta.id, Bons)}"></h:commandButton>
+                                                                    <h:commandButton class="btn colect-data-btn" value="Marcar como visto" action="#{comentario.marcarVisto(coment, Ruins)}"></h:commandButton></p>
+                                                                <p><a target="blank" href="https://www.facebook.com/pizzadacasadelivery/posts/#{coment.postIdFormatado}"><h4 align="right">Ir para a publicação</h4></a></p>
                                                                 <a class="popup-close" data-popup-close="popup-#{coment.commentsId}" href="#">x</a>
                                                             </div>
                                                         </div>                                                        
                                                     </h:form>
                                                 </td>
                                             </tr>
-                         
+
                                         </ui:repeat>                                               
                                     </tbody>
                                 </table>
@@ -105,7 +105,9 @@
             ========================== -->
 
         </div>
-        <!-- /.container-fluid -->        
-    </ui:define>
+        <!-- /.container-fluid --> 
+        <script>
 
+        </script>
+    </ui:define>    
 </ui:composition>

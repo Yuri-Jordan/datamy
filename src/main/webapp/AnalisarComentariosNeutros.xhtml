@@ -2,7 +2,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"                
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="./dataMyFace.xhtml">
+
 
     <ui:define name="content">
         <div class="container-fluid">                               
@@ -49,32 +51,45 @@
                                             <th>Mensagem do cliente</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{comentario.listarComentariosNeutros()}" var="comentarios">
+                                    <tbody>                                        
+                                        <ui:repeat value="#{comentario.listarComentariosNeutros()}" var="coment" rendered="true">                                            
                                             <tr>
-                                                <td><h:outputText value="#{comentarios.postMessage}" /></td>
-                                                <td><h:outputText value="#{comentarios.postLikesCount}" /></td>
-                                                <td><h:outputText value="#{comentarios.postFromName}" /></td>                                                
-                                                <td><h:outputText value="#{comentarios.postCommentsCount}" /></td>
-                                                <td><h:outputText value="#{comentarios.commentsMessage}" /></td>                                                
+                                                <td><h:outputText value="#{coment.postMessage}" /></td>
+                                                <td><h:outputText value="#{coment.postLikesCount}" /></td>
+                                                <td><h:outputText value="#{coment.postFromName}" /></td>                                                
+                                                <td><h:outputText value="#{coment.postCommentsCount}" /></td>
+                                                <td><h:outputText value="#{coment.commentsMessage}" /></td> 
+                                                <td><h:inputHidden value="token" /></td>    
                                                 <td>
-                                                    <a class="btn" data-popup-open="popup-1" href="#">Responder</a>
+                                                    <h:form>
+                                                        <a class="btn colect-data-btn" data-popup-open="popup-#{coment.commentsId}" href="#">Responder</a>
 
-                                                    <div class="popup" data-popup="popup-1">
-                                                        <div class="popup-inner">
-                                                            <h2>Responder ao comentario de <h:outputText value="#{comentarios.commentsFromName}"/></h2>
-                                                            <br/>
-                                                            <h5>Comentario: <h:outputText value="#{comentarios.commentsMessage}"/></h5>
-                                                            <br/>
+                                                        <div class="popup" data-popup="popup-#{coment.commentsId}">
+                                                            <div class="popup-inner">                                                                                                                                
+                                                                <h2>Responder ao comentario de <h:outputText value="#{coment.commentsFromName}"/></h2>
+                                                                <br/>
+                                                                <h5>Comentario: <h:outputText value="#{coment.commentsMessage}"/></h5>
+                                                                <br/>
 
-                                                            <p>Resposta: <h:inputText value="#{comentarios.commentsFromName}, somos gratos por sua avaliação! Faremos bom uso do seu comentário de modo a melhorar nossos serviços!"/></p>
-                                                            <p><h:commandButton class="btn btn-default" value="Publicar" action="#{comentario.responderComentario(coment.avaliacao, coment , coment.commentsId, coment.commentsFromName, coment.commentsMessage, resp.id)}"></h:commandButton></p>
-
-                                                            <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-                                                        </div>
-                                                    </div>                                                    
+                                                                <p>
+                                                                    <h5>Selecionar resposta</h5>                                                                    
+                                                                    <h:selectOneRadio value="#{resposta.resposta.id}">
+                                                                        <f:selectItems value="#{resposta.select()}" var="c"
+                                                                                       itemLabel="#{c.textoResposta}" itemValue="#{c.id}" />
+                                                                    </h:selectOneRadio>
+                                                                    <h:inputText class="form-control" value="#{resposta.resposta.textoResposta}"/>
+                                                                    <p class="help-block">Resposta personalizada</p>
+                                                                </p>
+                                                                <p><h:commandButton class="btn colect-data-btn" value="Publicar" action="#{comentario.responderComentario(resposta.resposta.textoResposta, coment , coment.commentsId, coment.commentsFromName, coment.commentsMessage, resposta.resposta.id, Neutros)}"></h:commandButton>
+                                                                    <h:commandButton class="btn colect-data-btn" value="Marcar como visto" action="#{comentario.marcarVisto(coment, Ruins)}"></h:commandButton></p>
+                                                                <p><a target="blank" href="https://www.facebook.com/pizzadacasadelivery/posts/#{coment.postIdFormatado}"><h4 align="right">Ir para a publicação</h4></a></p>
+                                                                <a class="popup-close" data-popup-close="popup-#{coment.commentsId}" href="#">x</a>
+                                                            </div>
+                                                        </div>                                                        
+                                                    </h:form>
                                                 </td>
                                             </tr>
+
                                         </ui:repeat>                                               
                                     </tbody>
                                 </table>

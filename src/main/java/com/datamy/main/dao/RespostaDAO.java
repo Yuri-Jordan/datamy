@@ -49,12 +49,12 @@ public class RespostaDAO extends ConexaoPGDao {
 
         try {
 
-            preparacao = conexao.prepareStatement("SELECT texto FROM resposta WHERE id=?");
+            preparacao = conexao.prepareStatement("SELECT * FROM resposta WHERE id=?");
             preparacao.setInt(1, id);
             resultado = preparacao.executeQuery();
 
             while (resultado.next()) {
-                resposta = new Resposta(resultado.getInt("id"), resultado.getString("titulo"));
+                resposta = new Resposta(resultado.getInt("id"), resultado.getString("texto"));
             }
 
         } catch (SQLException ex) {

@@ -47,18 +47,27 @@ public class ComentarioFBManagedBean implements Serializable {
         this.user = new Usuario();
     }
 
-    public void responderComentario(String token, ComentarioFB coment, String msgID, String from, String msgComent, int id) {
-        marcarVisto(coment);
+    public void responderComentario(String rp, ComentarioFB coment, String msgID, String from, String msgComent, int id, String emocao) {
+        
+        marcarVisto(coment, emocao);
         RDao rd = new RDao();
-        token = rd.select().getToken();
+        String token = rd.select().getToken();
         msgID = msgID + "/comments";
         Tag tag = new Tag();
         tag.setName(from);
-        
-        RespostaDAO rDao = new RespostaDAO();
-        Resposta r = new Resposta();
-        r = rDao.select(id);
-        String resposta = r.getTextoResposta();
+        String resposta;
+
+        if (rp == "") {
+            System.out.println("IF NULL "+rp);
+            RespostaDAO respostaDao = new RespostaDAO();
+            Resposta resp = new Resposta();
+            System.out.println("ID "+id);
+            resp = respostaDao.select(id);
+            resposta = resp.getTextoResposta();
+        } else {
+            System.out.println("ELSE "+rp);
+            resposta = rp;
+        }
 
         FacebookClient fbCli = new DefaultFacebookClient(token);
         fbCli.publish(msgID, String.class, Parameter.with("message", tag.getName() + ", " + resposta));
@@ -66,9 +75,14 @@ public class ComentarioFBManagedBean implements Serializable {
         resposta = "";
     }
 
+    public void curtirComentario(ComentarioFB com, String at) {
+        DefaultFacebookClient client = new DefaultFacebookClient(at);
+        client.publish(com.getCommentsId() + "/likes", Boolean.class);
+    }
+
     public ArrayList<ComentarioFB> listarComentariosRuins() {
         ArrayList<ComentarioFB> comentariosRuins = new ArrayList<ComentarioFB>();
-        comentariosRuins =  comentario_fb_dao.selectRuins();
+        comentariosRuins = comentario_fb_dao.selectRuins();
         return formatarTexto(comentariosRuins);
     }
 
@@ -80,13 +94,13 @@ public class ComentarioFBManagedBean implements Serializable {
 
     public ArrayList<ComentarioFB> listarComentariosBons() {
         ArrayList<ComentarioFB> comentarios = new ArrayList<ComentarioFB>();
-        comentarios = comentario_fb_dao.selectBons();                        
+        comentarios = comentario_fb_dao.selectBons();
         return formatarTexto(comentarios);
     }
-    
-    public ArrayList<ComentarioFB> formatarTexto(ArrayList<ComentarioFB> listaComentarios){
+
+    public ArrayList<ComentarioFB> formatarTexto(ArrayList<ComentarioFB> listaComentarios) {
         ArrayList<ComentarioFB> comentarios2 = new ArrayList<ComentarioFB>();
-        
+
         for (ComentarioFB s : listaComentarios) {
 
             String v = new String(s.getCommentsMessage().getBytes(), Charset.forName("UTF-8"));
@@ -98,8 +112,8 @@ public class ComentarioFBManagedBean implements Serializable {
             }
 
             s.setCommentsMessage(v);
-            s.setCommentsFromName(w);            
-            
+            s.setCommentsFromName(w);
+
             comentarios2.add(s);
         }
         return comentarios2;
@@ -113,9 +127,13 @@ public class ComentarioFBManagedBean implements Serializable {
         return comentario_fb_dao.aceitarResposta();
     }
 
-    public String marcarVisto(ComentarioFB com) {
+    public String marcarVisto(ComentarioFB com, String emocao) {
+        String emocaoPagina = emocao;
         comentario_fb_dao.marcarVisto(com);
-        return "AnalisarComentariosBons.xhtml";
+        RDao rd = new RDao();
+        String token = rd.select().getToken();
+        curtirComentario(com, token);
+        return "AnalisarComentarios"+emocaoPagina+".xhtml";
     }
 
     public ComentarioFB getComentario_fb() {

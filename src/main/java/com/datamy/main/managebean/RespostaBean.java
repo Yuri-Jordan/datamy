@@ -23,13 +23,14 @@ public class RespostaBean implements Serializable{
     
     private Resposta resposta;
     private RespostaDAO respostaDao;
+    private ArrayList<Resposta> respostas;
 
     public RespostaBean() {        
         this.resposta = new Resposta();
         this.respostaDao = new RespostaDAO();
     }
     
-    public ArrayList<Resposta> select(){
+    public ArrayList<Resposta> select(){       
         return respostaDao.select();
     }
 
@@ -48,7 +49,17 @@ public class RespostaBean implements Serializable{
     public void setRespostaDao(RespostaDAO respostaDao) {
         this.respostaDao = respostaDao;
     }
-    
-    
+
+    public ArrayList<Resposta> getRespostas() {
+        ArrayList<Resposta> resps = select();
+        for(Resposta r : resps){
+            respostas.add(r);
+        }
+        return respostas;
+    }
+
+    public void setRespostas(ArrayList<Resposta> respostas) {
+        this.respostas = respostas;
+    }        
     
 }

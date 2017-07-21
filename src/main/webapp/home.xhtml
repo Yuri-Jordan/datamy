@@ -8,48 +8,7 @@
         <br/><br/><br/><br/>
         <!-- colunas-->
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <!--Card-->
-                    <!--Cor do card vermelho-->
-                    <div class="card" style="color: White; background: #8B1A1A">
-
-                        <!--Imagem do cartão-->
-                        <div class="view overlay hm-white-slight">
-                            <!--<img src="resources/imagens/ruim.png" class="img-fluid" alt=""/>-->
-                            <a>
-                                <div class="mask waves-effect waves-light"></div>
-                            </a>
-                        </div>
-                        <!--Imagem do cartão-->
-                        <br/><br/>
-                        <!--Butão-->
-                        <a class="btn-floating btn-action red" href="AnalisarComentariosRuins.xhtml"><i class="fa fa-chevron-right"></i></a>
-
-                        <!--Conteúdo do cartão-->
-                        <div class="card-block">
-
-                            <!--titulo do catão-->
-                            <h4 class="card-title">Mensagens negativas</h4>
-                            <hr/>
-                            <!--texto-->
-                            <p class="card-text">Você tem <h:outputText  style="font-size: 20px" value="#{comentario.listarComentariosRuins().size()}"/> mensagens classificadas como negativas.</p>
-                        </div>
-                        <!--Conteúdo do cartão-->
-
-                        <!--Rodapé do cartão-->
-                        <div class="card-data">
-                            <ul>                                
-                                <li><a href="#"><i class="fa fa-facebook"> </i><h:outputText value="#{comentario.listarComentariosRuins().size()}"/></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"> </i>0</a></li>
-                            </ul>
-                        </div>
-                        <!--Rodapé do cartão-->
-                    </div>
-                    <!--Card-->
-                    <!--Cor do card vermelho-->
-                </div>
-
+            <div class="row"> 
                 <div class="col-md-4">
                     <!--Card-->
                     <!--Cor do card vermelho-->
@@ -90,7 +49,6 @@
                     <!--Card-->
                     <!--Cor do card vermelho-->
                 </div>
-                
                 <div class="col-md-4">
                     <!--Card-->
                     
@@ -133,15 +91,56 @@
                     <!--Cor do card vermelho-->
 
                 </div>
+                
+                <div class="col-md-4">
+                    <!--Card-->
+                    <!--Cor do card vermelho-->
+                    <div class="card" style="color: White; background: #8B1A1A">
+
+                        <!--Imagem do cartão-->
+                        <div class="view overlay hm-white-slight">
+                            <!--<img src="resources/imagens/ruim.png" class="img-fluid" alt=""/>-->
+                            <a>
+                                <div class="mask waves-effect waves-light"></div>
+                            </a>
+                        </div>
+                        <!--Imagem do cartão-->
+                        <br/><br/>
+                        <!--Butão-->
+                        <a class="btn-floating btn-action red" href="AnalisarComentariosRuins.xhtml"><i class="fa fa-chevron-right"></i></a>
+
+                        <!--Conteúdo do cartão-->
+                        <div class="card-block">
+
+                            <!--titulo do catão-->
+                            <h4 class="card-title">Mensagens negativas</h4>
+                            <hr/>
+                            <!--texto-->
+                            <p class="card-text">Você tem <h:outputText  style="font-size: 20px" value="#{comentario.listarComentariosRuins().size()}"/> mensagens classificadas como negativas.</p>
+                        </div>
+                        <!--Conteúdo do cartão-->
+
+                        <!--Rodapé do cartão-->
+                        <div class="card-data">
+                            <ul>                                
+                                <li><a href="#"><i class="fa fa-facebook"> </i><h:outputText value="#{comentario.listarComentariosRuins().size()}"/></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"> </i>0</a></li>
+                            </ul>
+                        </div>
+                        <!--Rodapé do cartão-->
+                    </div>
+                    <!--Card-->
+                    <!--Cor do card vermelho-->
+                </div> 
             </div>
             <hr/>
             <h:form>
                 <div class="col-md-5">              
                     <!--<img src="resources/imagens/datamy.png"/>-->
-                    <h3 align="center">Clique no botão para gerar dados atualizados do Facebook</h3>
+                    <h3 align="center">Clique no botão para atualizar os dados do Facebook</h3>
                 </div>
                 <div class="col-md-7">
-                    <h:commandButton class="btn btn-default" value="Coletar dados" action="#{r.coletar()}"/>
+                    <h:commandButton styleClass="btn colect-data-btn" value="Coletar dados" action="#{r.coletar()}"/>
                 </div>
             </h:form>
         </div>

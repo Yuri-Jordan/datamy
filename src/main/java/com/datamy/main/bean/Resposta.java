@@ -5,11 +5,14 @@
  */
 package com.datamy.main.bean;
 
+import java.io.Serializable;
+
 /**
  *
  * @author pablo
  */
-public class Resposta {
+public class Resposta implements Serializable{
+    private static final long serialVersionUID = 1L;
     int id;
     String textoResposta;
 

@@ -147,7 +147,7 @@ public class ComentarioFBDao extends ConexaoPGDao {
     public void marcarVisto(ComentarioFB id) {
         CriarConexao();
         try {
-            String sql = "UPDATE novo SET visto=true WHERE comments.id=?";
+            String sql = "UPDATE novo SET visto=true WHERE \"comments.id\"=?";
 
             preparacao = conexao.prepareStatement(sql);
             preparacao.setString(1, id.getCommentsId());

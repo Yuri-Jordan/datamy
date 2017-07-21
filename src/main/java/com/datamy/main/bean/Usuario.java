@@ -1,10 +1,13 @@
 package com.datamy.main.bean;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ric_l
  */
-public class Usuario {
+public class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int id;
     private String nome;
     private String perfil;
