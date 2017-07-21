@@ -1,27 +1,37 @@
- get_fb_dataset <- function(token, page){
-  require(Rfacebook)
-            data <- as.POSIXct('2014/07/12', tz = 'UTC')
-       posts <- getPage(page, token = token, reactions = T, feed = T, since = data)
-       
-       
-       comments <- get_all_comments(posts, token)
-       comments <- as.data.frame(comments, stringsAsFactors = F)
-       
-  return(comments)
-  
- }
- 
- get_all_comments <- function(posts, token){
-       
-       novo <- getPost(posts$id[1],token = token,comments = T)
-       for(i in 2:nrow(posts)){
-             novo <- merge(novo, (getPost(posts$id[i], 
-                                          token = token, 
-                                          comments = T)), all = T ) 
-       }
-       novo <- as.data.frame(novo, stringsAsFactors = F)   
-       return(novo)
- }
+get_fb_dataset <- function(token, page){
+      
+      # token <- 'EAACEdEose0cBAGJxhM7AGHW2CSeyAHw0E0C7BCtF5fZAHqqpSnwOzx2xgrI38XLDnDs8s5XJe0KEveJS11AVSTkNYfsvok9kXgTACOPiLwGNndyJzUZABWtPWZCBbQ7cxW2skId8YOze1rjpjWER0RCZAbGBZAwkrHty68YQXfxcQi1ITWByjAZAqu36tmOPcZD'
+      # page <- 'SKYbrasil'
+      # 
+      require(Rfacebook)
+      # data <- as.POSIXct('2016/07/12', tz = 'UTC')
+      posts <- getPage(page = page, token = token, reactions = T)
+      
+      comments <- get_all_comments(posts, token)
+      comments <- as.data.frame(comments, stringsAsFactors = F)
+      
+      return(comments)
+      
+}
+
+
+get_all_comments <- function(posts, token){
+      
+      lista <- getPost(post = posts$id[1], token = token, likes = F)
+      novo <- data.frame(lista$post, lista$comments, check.names = T)
+      
+      for(i in 2:nrow(posts)){
+            
+            if(!is.na(posts$id[i])){
+                  
+                  aux <- getPost(post = posts$id[i], token = token, likes = F)
+                  aux <- data.frame(aux$post, aux$comments, check.names = T)
+                  # aux <- ldply(aux, data.frame)
+                  novo <- merge(aux, novo, all = T)
+            }
+      }
+      return(novo)
+}
 
  
 # # install.packages("Rfacebook", dependencies = T)
